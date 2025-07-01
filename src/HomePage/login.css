@@ -1,0 +1,228 @@
+
+  
+  .login-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 720px;
+    backdrop-filter: blur(10px);
+    background-image: url("/public/background.jpg");
+    background-size: cover;
+    margin-top: 0px;
+  }
+  .login-overlay{
+    position: relative;
+    background-color: rgba(107, 105, 105, 0.745);
+    z-index: 999;
+    width: 100%;
+    min-height: 720px;
+    top: 0;
+    height: 100%;
+    align-items: center;
+  }
+  
+  .login-card {
+    margin-top: 150px;
+    margin-left:30%;
+    background-color: rgba(255, 255, 255, 0.944);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 50px 100px;
+    max-width: 40%;
+    text-align: center;
+  }
+  
+  .login-card h2 {
+    margin-bottom: 20px;
+    color: #2c0e6c;
+    font-weight: bold;
+  }
+  
+  .card-group {
+    margin-bottom: 15px;
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .card-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #222020;
+    font-size: 12px;
+    font-weight: bold;
+
+  }
+  
+  .card-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 12px;
+  }
+  
+  .login-button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color: #111c6d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .login-button:hover {
+    background-color: #0a103a;
+  }
+  
+  .signup-prompt {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .signup-prompt a {
+    font-size: 12px;
+    color: #19096a;
+    text-decoration: underline;
+  }
+  
+  .signup-prompt a:hover {
+    text-decoration: underline;
+  }
+
+  /*logo*/
+  .logo-container-login{
+
+background-color: white;
+position: relative;
+    width:100px;
+    height:100px;
+    display: flex;
+    border-radius: 50%;
+    top:180px;
+    left:50%;
+    transform: translateX(-50%);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+
+  }
+  .logo-login{
+    width: 95px;
+    border-radius: 100%;
+    z-index: 999;
+    margin-left: 0px;
+
+  }
+
+  /* Mobile Version */
+@media (max-width: 480px) {
+    .login-container {
+        min-height: 520px;
+      }
+      .login-overlay{
+        min-height: 520px;
+      }
+    .login-card {
+        margin-top: 50px;
+        margin-left: 10%;
+        padding: 30px 20px;
+        max-width: 80%;
+        max-height: 60%;
+    }
+
+    .login-card h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .card-group label {
+        font-size: 10px;
+    }
+
+    .card-group input {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    .login-button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .signup-prompt {
+        font-size: 12px;
+    }
+
+    .signup-prompt a {
+        font-size: 10px;
+    }
+
+    .logo-container-login {
+        width: 60px;
+        height: 60px;
+        top: 70px;
+    }
+
+    .logo-login {
+        width: 55px;
+    }
+}
+
+/* Tablet Version */
+@media (min-width: 481px) and (max-width: 1036px) {
+    /* .login-container {
+        min-height: 520px;
+      }
+      .login-overlay{
+        min-height: 520px;
+
+      } */
+    .login-card {
+        margin-top: 100px;
+        margin-left: 20%;
+        padding: 20px 30px;
+        max-width: 60%;
+    }
+
+    .login-card h2 {
+        margin-top: 20px;
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .card-group label {
+        font-size: 11px;
+    }
+
+    .card-group input {
+        font-size: 11px;
+        padding: 9px;
+    }
+
+    .login-button {
+        padding: 9px;
+        font-size: 15px;
+    }
+
+    .signup-prompt {
+        font-size: 13px;
+    }
+
+    .signup-prompt a {
+        font-size: 11px;
+    }
+
+    .logo-container-login {
+        width: 90px;
+        height: 90px;
+        top: 130px;
+    }
+
+    .logo-login {
+        width: 85px;
+    }
+}
+  

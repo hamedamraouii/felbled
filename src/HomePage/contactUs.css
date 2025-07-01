@@ -1,0 +1,94 @@
+.contact-container-contact {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.image-container-contact {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+
+.contact-image-contact {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay-contact {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+}
+
+.contact-title-contact {
+  font-size: 36px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.social-media-container-contact {
+  display: flex;
+  justify-content: center;
+}
+
+.social-media-list-contact {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+@media screen and (max-width: 768px) {
+  .social-media-list-contact {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+  }
+}
+
+.social-media-item-contact {
+  margin: 0 10px;
+}
+
+.social-icon-contact {
+  font-size: 50px;
+  color: #333;
+  background-color: white;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.social-icon-contact:hover {
+  background-color: #333;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+  .contact-title-contact {
+    font-size: 24px;
+  }
+
+  .social-icon-contact {
+    font-size: 40px;
+  }
+}

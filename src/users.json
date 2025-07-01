@@ -1,0 +1,63 @@
+
+[
+    {
+
+    "name": "Lindini",
+    "logo_url": "/images/logo55.jpeg",
+    "images_url": [
+        "/images/lindini17.jpeg",
+        "/images/lindini02.jpeg",
+        "/images/lindini03.jpeg",
+        "/images/lindini18.jpeg",
+        "/images/lindini06.jpeg",
+        "/images/lindini05.jpeg",
+        "/images/lindini07.jpeg",
+        "/images/lindini16.jpeg",
+        "/images/lindini14.jpeg",
+        "/images/lindini11.jpeg"
+    ],
+    "gouvernorat": "Tunis",
+    "pays": "Tunisie",
+    "delegation": "Tunis",
+    "activité": "Électricien",
+    "secteur": "Batiment",
+    "description":"LND.SERVICE في خدمتكم\n\n💸💸 أسوامنا مرفقة ونعاونوك بالفكرة والنصيحة مهما كانت الخدمة إلي تحب عليها، أحنا نخدمهالك وبأحسن جودة موجودة.\n\n✅ Installation électricité générale ⚡ 👨‍🔧\n✅ Caméra de surveillance\n✅ Système d'alarme 🚨\n✅ Réparation générale et rénovation 🔧\n✅ Tous les travaux électriques 🔌 ⚡\n✅ Éclairage ⚡\n✅ Entretien\n\nمع فريق محترف في خدمتكم.\n\n**Plant électricité gratuit**",
+    "address": "Rue 4101 N20 EZZOUHOUR, Tunis , Tunisie",
+    "category": ["Gym", "Yoga", "Personal Training"],
+    "etiquette": [
+        { "name": "Cardio Equipment" },
+        { "name": "Weight Training" },
+        { "name": "Group Classes" },
+        { "name": "Sauna" }
+    ]
+},
+{
+    "name": "Felbled",
+    "logo_url": "/images/logo55.jpeg",
+    "images_url": [
+        "/images/lindini17.jpeg",
+        "/images/lindini02.jpeg",
+        "/images/lindini03.jpeg",
+        "/images/lindini18.jpeg",
+        "/images/lindini06.jpeg",
+        "/images/lindini05.jpeg",
+        "/images/lindini07.jpeg",
+        "/images/lindini16.jpeg",
+        "/images/lindini14.jpeg",
+        "/images/lindini11.jpeg"
+    ],
+    "gouvernorat": "Tunis",
+    "pays": "Tunisie",
+    "delegation": "Tunis",
+    "activité": "Boite de développement",
+    "secteur": "",
+    "description":"LND.SERVICE في خدمتكم\n\n💸💸 أسوامنا مرفقة ونعاونوك بالفكرة والنصيحة مهما كانت الخدمة إلي تحب عليها، أحنا نخدمهالك وبأحسن جودة موجودة.\n\n✅ Installation électricité générale ⚡ 👨‍🔧\n✅ Caméra de surveillance\n✅ Système d'alarme 🚨\n✅ Réparation générale et rénovation 🔧\n✅ Tous les travaux électriques 🔌 ⚡\n✅ Éclairage ⚡\n✅ Entretien\n\nمع فريق محترف في خدمتكم.\n\n**Plant électricité gratuit**",
+    "address": "Rue 4101 N20 EZZOUHOUR, Tunis , Tunisie",
+    "category": [],
+    "etiquette": [
+        { "name": "boite de devloppement/informatique" }]
+       
+}]
+
+
+

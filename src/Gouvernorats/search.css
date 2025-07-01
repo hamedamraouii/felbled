@@ -1,0 +1,121 @@
+.header-container-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 1rem 1rem;
+  background: #eaeaea;
+  min-height: 80px;
+  margin-top: 2rem;
+  
+}
+
+.search-container-search {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 40px;
+  padding: 0.15rem;
+  width: 45%;  /* Reduced from 80% to 60% */
+  max-width: 600px; /* Reduced from 1200px to 900px */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  height: 60px;
+}
+
+.search-section-search {
+  flex: 1;
+  padding: 0 1rem;
+  border-right: 1px solid #e0e0e0;
+}
+
+.search-section-search:last-child {
+  border-right: none;
+}
+
+.search-section-search label {
+  display: block;
+  font-size: 0.7rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.search-section-search .react-select__control {
+  border: none;
+  box-shadow: none;
+  min-height: 20px;
+  cursor: pointer;
+}
+
+.search-section-search .react-select__value-container {
+  padding: 0;
+ 
+}
+
+.search-section-search .react-select__placeholder {
+  color: #999;
+  font-size: 0.6rem;
+}
+
+.search-section-search .react-select__single-value {
+  color: #333;
+  font-size: 0.875rem;
+}
+
+.search-btn-search {
+  background-color: #00BCD4;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.search-btn-search:hover {
+  background-color: #00ACC1;
+}
+
+@media (max-width: 768px) {
+  .search-container-search {
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 1rem;
+    width: 90%;
+    height: auto;
+  }
+
+  .search-section-search {
+    width: 100%;
+    padding: 0.5rem 0;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .search-section-search:last-child {
+    border-bottom: none;
+  }
+
+  .search-btn-search {
+    margin-top: 1rem;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .search-container-search {
+    width: 65%;
+    height: auto;
+  }
+
+  .search-section-search {
+    padding: 0 0.3rem;
+  }
+}

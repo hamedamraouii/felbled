@@ -1,0 +1,442 @@
+/* General Layout (Three Columns) */
+.container-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px; 
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+
+/* Left Section (Delegations List) */
+.left-section-user {
+    width: 18%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    transition: width 0.3s ease; 
+}
+
+.gouvernaurat-title-user {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.delegation-list-user {
+    list-style-type: none;
+    padding: 0;
+    margin-left: 15%;
+    font-size: 11px;
+}
+
+.delegation-item-user {
+    margin-bottom: 10px;
+}
+
+.delegation-item-user label {
+    font-size: 11px;
+    display: block;
+}
+
+.delegation-item-user input {
+    margin-right: 10px;
+}
+
+/* Middle Section */
+.middle-section-user {
+    width: 100%;
+    padding: 20px;
+    transition: width 0.3s ease; 
+    margin-top: -20px;
+}
+
+.background-image-container {
+    position: relative;
+    height: 200px; 
+    margin-bottom: 20px;
+}
+
+.gouvernaurat-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-overlay-text {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(26, 25, 25, 0.5); /* Semi-transparent background */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.gouvernaurat-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* users Grid */
+.users-list-container h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* User Item Container */
+.users-item-user {
+    background-color: white; /* White background for each user item */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Stack image and text vertically */
+}
+
+.users-item-user:hover {
+    transform: scale(1.05);
+}
+
+/* Image Container */
+.image-container-user {
+    width: 100%;
+    height: 150px; /* Fixed height for the image container */
+    overflow: hidden; /* Ensure the image doesn't overflow */
+}
+
+
+.image-user {
+    border-radius: 10px 10px 0 0;
+    height: 161%;
+    object-fit: cover;
+    width: 35%;
+}
+
+/* Text Container */
+.text-container-user {
+    padding: 15px; /* Padding for the text */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Space between text elements */
+}
+
+.text-container-user p {
+    margin: 0;
+    font-size: 12px;
+    color: #333; /* Dark text color */
+}
+
+/* Right Section (Empty for Ads) */
+.right-section-user {
+    width: 25%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    transition: width 0.3s ease; /* Smooth resizing transition */
+}
+
+/* Responsiveness: Adjust layout for smaller screens */
+@media (min-width: 769px) and (max-width: 1200px) {
+    .container-user {
+        flex-direction: column;
+        width: 100%; 
+        margin-top: 80px;
+    }
+
+    .middle-section-user {
+        width: 100%; /* Full width on smaller screens */
+        margin-bottom: 20px;
+        transition: width 0.3s ease; 
+    }
+
+    .users-grid {
+        grid-template-columns: repeat(4, 1fr); /* 2 items per row on smaller screens */
+    }
+    .left-section-user{
+        display: flex;
+        width: 100%;
+        height: 150px;
+        flex-direction: row;
+     }
+     .delegation-list-user {
+        display: flex;
+        flex-wrap: wrap; /* Allow items to wrap to the next line */
+        gap: 10px; /* Optional: to control the spacing between items */
+    }
+
+     .right-section-user{
+        display: none;
+     }
+     .gouvernaurat-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .image-overlay-text {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        background-color: rgba(0, 0, 0, 0.5); 
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 15px;
+    }
+    .users-grid {
+        grid-template-columns: repeat(4, 1fr);
+        width: 100%;
+    }
+    .delegation-item-user{
+    font-size: 12px;
+    }
+
+}
+
+@media (min-width: 459px) and (max-width: 768px) {
+    .container-user {
+        flex-direction: column;
+        width: 100%; 
+        margin-top: -15px;
+    }
+
+    .delegation-item-user{
+        font-size: 11px;
+        }
+    .middle-section-user {
+        width: 100%; /* Full width on smaller screens */
+        margin-bottom: 20px;
+        transition: width 0.3s ease; 
+    }
+
+    .users-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 items per row on smaller screens */
+    }
+    .left-section-user{
+        display: flex;
+        width: 100%;
+        margin-top: 15%;
+        max-height: 200px; 
+        flex-direction: row;
+     }
+     .delegation-list-user {
+        display: flex;
+        flex-wrap: wrap; /* Allow items to wrap to the next line */
+        gap: 10px; /* Optional: to control the spacing between items */
+        font-size: 11px;
+    }
+
+     .right-section-user{
+        display: none;
+     }
+     .gouvernaurat-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .image-overlay-text {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+    }
+    .users-grid {
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 460px) {
+    .left-section-user{
+        display: flex;
+        margin-top: 50px;
+        width: 100%;
+        height: 150px;
+        flex-direction: row;
+        height: 330px;
+    }
+    .container-user {
+        flex-direction: column;
+        width: 100%; 
+        margin-top: 20px;
+    }
+
+    .delegation-item-user{
+        font-size: 11px;
+        }
+    .middle-section-user {
+        width: 100%; 
+        margin-bottom: 20px;
+        margin-top: -20px;
+        transition: width 0.3s ease; 
+    }
+
+    .users-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+     .delegation-list-user {
+        display: flex;
+        flex-wrap: wrap; 
+        gap: 10px; 
+        font-size: 11px;
+    }
+
+     .right-section-user{
+        display: none;
+     }
+     .gouvernaurat-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .image-overlay-text {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+    }
+    .users-grid {
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+    }
+
+}
+
+.container-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* users Grid Layout */
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 4 items per row */
+    gap: 20px; /* Space between items */
+    margin-top: 20px;
+  }
+  
+  /* White Container for Each User Item */
+  .user-item-container {
+    background-color: white; /* White background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden; /* Ensure content stays within the container */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    display: flex;
+    flex-direction: column; /* Stack image and text vertically */
+    height: 100%; /* Ensure all items have the same height */
+  }
+  
+  .user-item-container:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  }
+  
+  /* Image Container */
+  .image-container-user {
+    position: relative;
+    width: 100%;
+    height: 150px; /* Fixed height for the image container */
+    overflow: hidden; /* Ensure the image doesn't overflow */
+  }
+  
+  .image-user {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
+    border-radius: 10px 10px 0 0; /* Rounded corners only at the top */
+  }
+  
+  
+  .heart-icon.selected {
+    color: red; /* Heart color when selected */
+  }
+  
+  .heart-icon:hover {
+    color: red; /* Change color on hover */
+  }
+  
+  /* Text Container */
+  .text-container-user {
+    padding: 15px; /* Padding for the text */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Space between text elements */
+    flex-grow: 1; /* Ensure text container takes up remaining space */
+  }
+  
+  .user-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* Dark text color */
+    margin: 0;
+  }
+  
+  .user-delegation,
+  .user-address {
+    font-size: 14px;
+    color: #666; /* Lighter text color */
+    margin: 0;
+  }
+
+  @media (max-width: 1200px) {
+    .users-grid {
+      grid-template-columns: repeat(3, 1fr); /* 3 items per row for medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .users-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 items per row for tablets */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .users-grid {
+      grid-template-columns: repeat(2, 1fr); /* 1 item per row for mobile */
+    }
+  }
+
+  .see-more-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .see-more-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .see-more-button:hover {
+    background-color: #0056b3;
+  }
+  

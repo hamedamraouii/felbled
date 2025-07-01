@@ -1,0 +1,25 @@
+.publicite-slider-container {
+  margin: 0px auto;
+  padding: 0px;
+  max-width: 1500px;
+  background-color: #ffffff;
+  border: 2px solid #00bcd4;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.publicite-slide {
+  padding: 10px;
+  text-align: center;
+}
+
+.publicite-slide img {
+  max-height: 100px;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.publicite-slide img:hover {
+  transform: scale(1.05);
+}

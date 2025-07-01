@@ -1,0 +1,227 @@
+.header {
+  background-image: url("/public/background6.png");
+  background-size: cover;
+  margin-top: 0px;
+  min-height: 500px;
+}
+.Pub-decktop {
+  margin-top: -50px;
+}
+
+.Pub-mobile {
+  display: none;
+}
+.header-overlay-home {
+  /*background-color: rgba(255, 255, 255, 0.5);*/
+  height: 100%;
+  min-height: 500px;
+  width: 100%;
+  z-index: 9999;
+}
+
+.box-container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  top: -70px;
+  gap: 5%;
+  padding: 16px;
+}
+
+.box {
+  flex: 1;
+  max-width: 25%;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-sizing: border-box;
+  transition: transform 0.2s ease-in-out;
+  height: 80px;
+  cursor: pointer;
+}
+.box1 {
+  flex: 1;
+  max-width: 30%;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-sizing: border-box;
+  transition: transform 0.2s ease-in-out;
+  height: 80px;
+  cursor: pointer;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+}
+.box1:hover {
+  transform: translateY(-5px);
+}
+.boxData {
+  margin-top: 10px;
+}
+.searchmobile {
+  display: none;
+}
+
+@media (min-width: 644px) and (max-width: 833px) {
+  .box {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+  .boxData {
+    margin-top: 5px;
+  }
+  .searchdesktop {
+    display: block;
+  }
+}
+
+@media (max-width: 644px) {
+  .box {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    padding: 20px 10px;
+    min-width: 100%;
+  }
+  .box1 {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    padding: 20px 10px;
+    min-width: 100%;
+  }
+  .Pub-mobile {
+    display: block;
+  }
+  .Pub-decktop {
+    display: none;
+  }
+
+  .box-container {
+    top: -10px;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5%;
+    padding: 16px;
+  }
+  .boxData {
+    margin-top: 5px;
+  }
+  .searchdesktop {
+    display: none;
+  }
+  .searchmobile {
+    display: block;
+  }
+
+  @media (max-width: 480px) and (max-width: 724px) {
+    .header-overlay-home {
+      align-items: center;
+    }
+    .header {
+      background-image: url("/public/backgroundmobile6.png");
+    }
+    .Pub-mobile {
+      display: block;
+      margin-top: 40px;
+    }
+    .Pub-decktop {
+      display: none;
+    }
+    .searchdesktop {
+      display: none;
+    }
+    .searchmobile {
+      display: block;
+    }
+  }
+}
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.75s ease-in-out, visibility 1.25s ease-in-out,
+    transform 0.75s ease-in-out;
+  z-index: 100000;
+}
+.loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.3);
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: backdrop-filter 0.75s ease-in-out;
+}
+.loader-hidden::before {
+  backdrop-filter: blur(0px);
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+.loader-logo {
+  width: 220px;
+  max-width: 90vw;
+  height: auto;
+  animation: fadeInUp 1s ease-in-out;
+  z-index: 100001;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.loader-logo {
+  animation: pulse 2s ease-in-out infinite;
+}
+
