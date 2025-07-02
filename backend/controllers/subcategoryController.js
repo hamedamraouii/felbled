@@ -1,31 +1,19 @@
-const { cloudinary } = require('../utils/cloudinary');
+const { uploadToLocalStorage, deleteLocalFile } = require('../utils/localStorage');
 const SubCategory = require('../models/SubCategory');
 const Category = require('../models/category');
 const mongoose = require('mongoose');
 
-const uploadToCloudinary = (buffer, options = {}) => {
-  return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder: 'felbled/subcategories',
-        ...options
-      },
-      (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
-      }
-    );
-    uploadStream.end(buffer);
-  });
+const uploadToLocal = async (buffer, originalName, folder) => {
+  return await uploadToLocalStorage(buffer, originalName, { folder });
 };
 
-const deleteCloudinaryMedia = async (public_id, resource_type = 'image') => {
-  if (!public_id) return;
+const deleteLocalMedia = async (fileUrl) => {
+  if (!fileUrl) return;
   try {
-    await cloudinary.uploader.destroy(public_id, { resource_type });
-    console.log(`Média supprimé: ${public_id}`);
+    await deleteLocalFile(fileUrl);
+    console.log(`File deleted: ${fileUrl}`);
   } catch (err) {
-    console.error('Erreur suppression Cloudinary:', err);
+    console.error('Error deleting local file:', err);
   }
 };
 
@@ -122,9 +110,7 @@ exports.createSubCategory = async (req, res) => {
     // Traitement de l'image
     if (files?.image && files.image[0]) {
       console.log('Upload de l\'image...');
-      const imageResult = await uploadToCloudinary(files.image[0].buffer, {
-        transformation: [{ width: 400, height: 300, crop: 'limit' }]
-      });
+      const imageResult = await uploadToLocal(files.image[0].buffer, files.image[0].originalname, 'subcategories');
       
       subcategoryData.image = {
         public_id: imageResult.public_id,
@@ -243,13 +229,11 @@ exports.updateSubCategory = async (req, res) => {
     // Gestion de l'image
     if (files?.image && files.image[0]) {
       // Suppression de l'ancienne image si elle existe
-      if (subcategory.image?.public_id) {
-        await deleteCloudinaryMedia(subcategory.image.public_id);
+      if (subcategory.image?.url) {
+        await deleteLocalMedia(subcategory.image.url);
       }
       
-      const imageResult = await uploadToCloudinary(files.image[0].buffer, {
-        transformation: [{ width: 400, height: 300, crop: 'limit' }]
-      });
+      const imageResult = await uploadToLocal(files.image[0].buffer, files.image[0].originalname, 'subcategories');
       
       updateData.image = {
         public_id: imageResult.public_id,
@@ -332,9 +316,9 @@ exports.deleteSubCategory = async (req, res) => {
       );
     }
 
-    // Suppression de l'image Cloudinary si elle existe
-    if (subcategory.image?.public_id) {
-      await deleteCloudinaryMedia(subcategory.image.public_id);
+    // Suppression de l'image locale si elle existe
+    if (subcategory.image?.url) {
+      await deleteLocalMedia(subcategory.image.url);
     }
 
     // Suppression de la sous-catégorie
