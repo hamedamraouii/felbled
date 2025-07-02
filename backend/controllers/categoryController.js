@@ -1,32 +1,14 @@
-const { cloudinary } = require('../utils/cloudinary');
+const { uploadCategoryFile, deleteLocalMedia } = require('../utils/localStorage');
 const Category = require('../models/category');
 const SubCategory = require('../models/SubCategory');
 const mongoose = require('mongoose');
 
-const uploadToCloudinary = (buffer, options = {}) => {
-  return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder: 'felbled/categories',
-        ...options
-      },
-      (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
-      }
-    );
-    uploadStream.end(buffer);
-  });
+const uploadToCloudinary = (buffer, options = {}, filename = 'upload.jpg') => {
+  return uploadCategoryFile(buffer, filename, options);
 };
 
 const deleteCloudinaryMedia = async (public_id, resource_type = 'image') => {
-  if (!public_id) return;
-  try {
-    await cloudinary.uploader.destroy(public_id, { resource_type });
-    console.log(`Média supprimé: ${public_id}`);
-  } catch (err) {
-    console.error('Erreur suppression Cloudinary:', err);
-  }
+  return deleteLocalMedia(public_id, resource_type);
 };
 
 // Helper pour nettoyer et valider les ObjectIds des sous-catégories
@@ -197,7 +179,7 @@ exports.createCategory = async (req, res) => {
       console.log('Upload de l\'image...');
       const imageResult = await uploadToCloudinary(files.image[0].buffer, {
         transformation: [{ width: 800, height: 600, crop: 'limit' }]
-      });
+      }, files.image[0].originalname);
       
       categoryData.image = {
         public_id: imageResult.public_id,
@@ -321,7 +303,7 @@ exports.updateCategory = async (req, res) => {
       
       const imageResult = await uploadToCloudinary(files.image[0].buffer, {
         transformation: [{ width: 800, height: 600, crop: 'limit' }]
-      });
+      }, files.image[0].originalname);
       
       updateData.image = {
         public_id: imageResult.public_id,

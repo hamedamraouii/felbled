@@ -1,6 +1,4 @@
 const multer = require('multer');
-// const { imageStorage, videoStorage } = require('../utils/cloudinary'); 
-// (Tu peux garder ou retirer selon ton besoin, ici on utilise memoryStorage)
 
 const upload = multer({
   storage: multer.memoryStorage(), 
