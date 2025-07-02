@@ -3,24 +3,13 @@ const Governorat = require('../models/governorat');
 const Delegation = require('../models/Delegation');
 const Category = require('../models/category');
 const SubCategory = require('../models/SubCategory');
-const { cloudinary } = require('../utils/cloudinary');
+const { uploadUserFile, uploadVideoFile, deleteLocalMedia } = require('../utils/localStorage');
 const mongoose = require('mongoose');
 
-// Helper to upload a file to Cloudinary
-const uploadToCloudinary = (buffer, options = {}) => {
-  return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder: 'felbled/users',
-        ...options
-      },
-      (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
-      }
-    );
-    uploadStream.end(buffer);
-  });
+// Helper to upload a file to local storage
+const uploadToCloudinary = (buffer, options = {}, filename = 'upload.jpg') => {
+  // For images, use uploadUserFile with the provided filename
+  return uploadUserFile(buffer, filename, options);
 };
 
 // Helper for cleaning and validating ObjectIds (array)
@@ -77,15 +66,9 @@ const cleanSingleObjectId = (data, fieldName) => {
   return null;
 };
 
-// Helper to delete Cloudinary media
+// Helper to delete local media
 const deleteCloudinaryMedia = async (public_id, resource_type = 'image') => {
-  if (!public_id) return;
-  try {
-    await cloudinary.uploader.destroy(public_id, { resource_type });
-    console.log(`Média supprimé: ${public_id}`);
-  } catch (err) {
-    console.error('Erreur suppression Cloudinary:', err);
-  }
+  return deleteLocalMedia(public_id, resource_type);
 };
 
 // Create user
@@ -253,7 +236,7 @@ exports.createUser = async (req, res) => {
     if (files?.logo && files.logo[0]) {
       const logoResult = await uploadToCloudinary(files.logo[0].buffer, {
         transformation: [{ width: 500, height: 500, crop: 'limit' }]
-      });
+      }, files.logo[0].originalname);
       userData.logo = {
         public_id: logoResult.public_id,
         url: logoResult.secure_url,
@@ -266,7 +249,7 @@ exports.createUser = async (req, res) => {
       const imagePromises = files.images.map(image =>
         uploadToCloudinary(image.buffer, {
           transformation: [{ width: 1000, height: 1000, crop: 'limit' }]
-        })
+        }, image.originalname)
       );
       const imageResults = await Promise.all(imagePromises);
       userData.images = imageResults.map(result => ({
@@ -278,10 +261,7 @@ exports.createUser = async (req, res) => {
     }
 
     if (files?.video && files.video[0]) {
-      const videoResult = await uploadToCloudinary(files.video[0].buffer, {
-        resource_type: 'video',
-        folder: 'felbled/videos'
-      });
+      const videoResult = await uploadVideoFile(files.video[0].buffer, files.video[0].originalname);
       userData.video = videoResult.secure_url; // Store as string URL
     }
 
@@ -447,7 +427,7 @@ exports.updateUser = async (req, res) => {
       if (user.logo?.public_id) await deleteCloudinaryMedia(user.logo.public_id);
       const logoResult = await uploadToCloudinary(files.logo[0].buffer, {
         transformation: [{ width: 500, height: 500, crop: 'limit' }]
-      });
+      }, files.logo[0].originalname);
       updateData.logo = {
         public_id: logoResult.public_id,
         url: logoResult.secure_url,
@@ -465,7 +445,7 @@ exports.updateUser = async (req, res) => {
       const imagePromises = files.images.map(image =>
         uploadToCloudinary(image.buffer, {
           transformation: [{ width: 1000, height: 1000, crop: 'limit' }]
-        })
+        }, image.originalname)
       );
       const imageResults = await Promise.all(imagePromises);
       updateData.images = imageResults.map(result => ({
@@ -481,10 +461,7 @@ exports.updateUser = async (req, res) => {
       if (user.video && typeof user.video === 'object' && user.video.public_id) {
         await deleteCloudinaryMedia(user.video.public_id, 'video');
       }
-      const videoResult = await uploadToCloudinary(files.video[0].buffer, {
-        resource_type: 'video',
-        folder: 'felbled/videos'
-      });
+      const videoResult = await uploadVideoFile(files.video[0].buffer, files.video[0].originalname);
       updateData.video = videoResult.secure_url; // Store as string
     }
 
