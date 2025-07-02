@@ -11,6 +11,21 @@
 # production
 /build
 
+# uploaded files (exclude uploaded content but keep directory structure)
+uploads/*
+!uploads/.gitkeep
+!uploads/*/
+uploads/*/*.jpg
+uploads/*/*.jpeg
+uploads/*/*.png
+uploads/*/*.gif
+uploads/*/*.webp
+uploads/*/*.mp4
+uploads/*/*.avi
+uploads/*/*.mov
+uploads/*/*.wmv
+uploads/*/*.flv
+
 # misc
 .DS_Store
 .env.local

@@ -3,24 +3,12 @@ const Governorat = require('../models/governorat');
 const Delegation = require('../models/Delegation');
 const Category = require('../models/category');
 const SubCategory = require('../models/SubCategory');
-const { cloudinary } = require('../utils/cloudinary');
+const { uploadToLocalStorage, deleteLocalFile } = require('../utils/localStorage');
 const mongoose = require('mongoose');
 
-// Helper to upload a file to Cloudinary
-const uploadToCloudinary = (buffer, options = {}) => {
-  return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder: 'felbled/users',
-        ...options
-      },
-      (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
-      }
-    );
-    uploadStream.end(buffer);
-  });
+// Helper to upload a file to local storage
+const uploadToLocal = async (buffer, originalName, folder) => {
+  return await uploadToLocalStorage(buffer, originalName, { folder });
 };
 
 // Helper for cleaning and validating ObjectIds (array)
@@ -77,14 +65,14 @@ const cleanSingleObjectId = (data, fieldName) => {
   return null;
 };
 
-// Helper to delete Cloudinary media
-const deleteCloudinaryMedia = async (public_id, resource_type = 'image') => {
-  if (!public_id) return;
+// Helper to delete local media files
+const deleteLocalMedia = async (fileUrl) => {
+  if (!fileUrl) return;
   try {
-    await cloudinary.uploader.destroy(public_id, { resource_type });
-    console.log(`Média supprimé: ${public_id}`);
+    await deleteLocalFile(fileUrl);
+    console.log(`File deleted: ${fileUrl}`);
   } catch (err) {
-    console.error('Erreur suppression Cloudinary:', err);
+    console.error('Error deleting local file:', err);
   }
 };
 
@@ -251,9 +239,7 @@ exports.createUser = async (req, res) => {
 
     // Handle file uploads
     if (files?.logo && files.logo[0]) {
-      const logoResult = await uploadToCloudinary(files.logo[0].buffer, {
-        transformation: [{ width: 500, height: 500, crop: 'limit' }]
-      });
+      const logoResult = await uploadToLocal(files.logo[0].buffer, files.logo[0].originalname, 'users');
       userData.logo = {
         public_id: logoResult.public_id,
         url: logoResult.secure_url,
@@ -264,9 +250,7 @@ exports.createUser = async (req, res) => {
 
     if (files?.images && files.images.length > 0) {
       const imagePromises = files.images.map(image =>
-        uploadToCloudinary(image.buffer, {
-          transformation: [{ width: 1000, height: 1000, crop: 'limit' }]
-        })
+        uploadToLocal(image.buffer, image.originalname, 'users')
       );
       const imageResults = await Promise.all(imagePromises);
       userData.images = imageResults.map(result => ({
@@ -278,10 +262,7 @@ exports.createUser = async (req, res) => {
     }
 
     if (files?.video && files.video[0]) {
-      const videoResult = await uploadToCloudinary(files.video[0].buffer, {
-        resource_type: 'video',
-        folder: 'felbled/videos'
-      });
+      const videoResult = await uploadToLocal(files.video[0].buffer, files.video[0].originalname, 'videos');
       userData.video = videoResult.secure_url; // Store as string URL
     }
 
@@ -444,10 +425,8 @@ exports.updateUser = async (req, res) => {
 
     // Handle file uploads
     if (files?.logo && files.logo[0]) {
-      if (user.logo?.public_id) await deleteCloudinaryMedia(user.logo.public_id);
-      const logoResult = await uploadToCloudinary(files.logo[0].buffer, {
-        transformation: [{ width: 500, height: 500, crop: 'limit' }]
-      });
+      if (user.logo?.url) await deleteLocalMedia(user.logo.url);
+      const logoResult = await uploadToLocal(files.logo[0].buffer, files.logo[0].originalname, 'users');
       updateData.logo = {
         public_id: logoResult.public_id,
         url: logoResult.secure_url,
@@ -459,13 +438,11 @@ exports.updateUser = async (req, res) => {
     if (files?.images && files.images.length > 0) {
       if (user.images?.length > 0) {
         await Promise.all(
-          user.images.map(img => deleteCloudinaryMedia(img.public_id))
+          user.images.map(img => deleteLocalMedia(img.url))
         );
       }
       const imagePromises = files.images.map(image =>
-        uploadToCloudinary(image.buffer, {
-          transformation: [{ width: 1000, height: 1000, crop: 'limit' }]
-        })
+        uploadToLocal(image.buffer, image.originalname, 'users')
       );
       const imageResults = await Promise.all(imagePromises);
       updateData.images = imageResults.map(result => ({
@@ -478,13 +455,10 @@ exports.updateUser = async (req, res) => {
 
     if (files?.video && files.video[0]) {
       // If there's an old video, try to delete it
-      if (user.video && typeof user.video === 'object' && user.video.public_id) {
-        await deleteCloudinaryMedia(user.video.public_id, 'video');
+      if (user.video) {
+        await deleteLocalMedia(user.video);
       }
-      const videoResult = await uploadToCloudinary(files.video[0].buffer, {
-        resource_type: 'video',
-        folder: 'felbled/videos'
-      });
+      const videoResult = await uploadToLocal(files.video[0].buffer, files.video[0].originalname, 'videos');
       updateData.video = videoResult.secure_url; // Store as string
     }
 
@@ -527,15 +501,15 @@ exports.deleteUser = async (req, res) => {
     }
     
     const deletePromises = [];
-    if (user.logo?.public_id) deletePromises.push(deleteCloudinaryMedia(user.logo.public_id));
+    if (user.logo?.url) deletePromises.push(deleteLocalMedia(user.logo.url));
     if (user.images?.length > 0) {
       user.images.forEach(img => {
-        if (img.public_id) deletePromises.push(deleteCloudinaryMedia(img.public_id));
+        if (img.url) deletePromises.push(deleteLocalMedia(img.url));
       });
     }
-    // Handle video deletion - check if it's an object with public_id
-    if (user.video && typeof user.video === 'object' && user.video.public_id) {
-      deletePromises.push(deleteCloudinaryMedia(user.video.public_id, 'video'));
+    // Handle video deletion 
+    if (user.video) {
+      deletePromises.push(deleteLocalMedia(user.video));
     }
     
     await Promise.all(deletePromises);
