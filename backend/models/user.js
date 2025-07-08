@@ -49,7 +49,11 @@ const userSchema = new Schema({
   
   // Business info
   activité: { type: String, default: null },
-  secteur: { type: String, default: null },
+  secteur: { 
+    type: mongoose.Schema.Types.Mixed, // Can be ObjectId or String for backward compatibility
+    ref: 'Secteur',
+    default: null 
+  },
   description: { type: String, default: null },
   telephone: { type: String, default: null },
   horaire: { type: String, default: null },

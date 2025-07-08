@@ -3,6 +3,7 @@ const Governorat = require('../models/governorat');
 const Delegation = require('../models/Delegation');
 const Category = require('../models/category');
 const SubCategory = require('../models/SubCategory');
+const Secteur = require('../models/secteur');
 const { cloudinary } = require('../utils/cloudinary');
 const mongoose = require('mongoose');
 
@@ -187,6 +188,10 @@ exports.createUser = async (req, res) => {
     if (cleanedDelegation) userData.delegation = cleanedDelegation;
     else delete userData.delegation;
 
+    const cleanedSecteur = cleanSingleObjectId(userData, 'secteur');
+    if (cleanedSecteur) userData.secteur = cleanedSecteur;
+    else delete userData.secteur;
+
     // Validate references existence (only if they are ObjectIds)
     if (userData.gouvernorat && mongoose.Types.ObjectId.isValid(userData.gouvernorat)) {
       const gouvernoratExists = await Governorat.findById(userData.gouvernorat);
@@ -210,6 +215,16 @@ exports.createUser = async (req, res) => {
         return res.status(400).json({
           success: false,
           error: 'La délégation ne correspond pas au gouvernorat sélectionné'
+        });
+      }
+    }
+
+    if (userData.secteur && mongoose.Types.ObjectId.isValid(userData.secteur)) {
+      const secteurExists = await Secteur.findById(userData.secteur);
+      if (!secteurExists) {
+        return res.status(400).json({
+          success: false,
+          error: 'Secteur invalide'
         });
       }
     }
@@ -293,6 +308,7 @@ exports.createUser = async (req, res) => {
     const populatedUser = await User.findById(newUser._id)
       .populate('gouvernorat', 'name')
       .populate('delegation', 'name')
+      .populate('secteur', 'name image')
       .populate('categories', 'name image')
       .populate('subcategories', 'name image');
 
@@ -431,6 +447,10 @@ exports.updateUser = async (req, res) => {
     const cleanedDelegation = cleanSingleObjectId(updateData, 'delegation');
     if (cleanedDelegation) updateData.delegation = cleanedDelegation;
 
+    const cleanedSecteur = cleanSingleObjectId(updateData, 'secteur');
+    if (cleanedSecteur) updateData.secteur = cleanedSecteur;
+    else if (updateData.hasOwnProperty('secteur')) delete updateData.secteur;
+
     // Same validation logic as create...
     if (updateData.gouvernorat && updateData.gouvernorat !== user.gouvernorat?.toString()) {
       const gouvernoratExists = await Governorat.findById(updateData.gouvernorat);
@@ -438,6 +458,16 @@ exports.updateUser = async (req, res) => {
         return res.status(400).json({
           success: false,
           error: 'Gouvernorat invalide'
+        });
+      }
+    }
+
+    if (updateData.secteur && updateData.secteur !== user.secteur?.toString()) {
+      const secteurExists = await Secteur.findById(updateData.secteur);
+      if (!secteurExists) {
+        return res.status(400).json({
+          success: false,
+          error: 'Secteur invalide'
         });
       }
     }
@@ -495,6 +525,7 @@ exports.updateUser = async (req, res) => {
     )
       .populate('gouvernorat', 'name')
       .populate('delegation', 'name')
+      .populate('secteur', 'name image')
       .populate('categories', 'name image')
       .populate('subcategories', 'name image')
       .select('-__v');
@@ -615,6 +646,7 @@ exports.getAllUsers = async (req, res) => {
     const users = await User.find()
       .populate('gouvernorat', 'name') // IMPORTANT: Populate avec le nom
       .populate('delegation', 'name')  // IMPORTANT: Populate avec le nom
+      .populate('secteur', 'name image')
       .populate('categories', 'name image')
       .populate('subcategories', 'name image')
       .select('-__v');
@@ -642,6 +674,7 @@ exports.getUserById = async (req, res) => {
     const user = await User.findById(req.params.id)
       .populate('gouvernorat', 'name')
       .populate('delegation', 'name')
+      .populate('secteur', 'name image')
       .populate('categories', 'name image')
       .populate('subcategories', 'name image')
       .select('-__v');
@@ -673,6 +706,89 @@ exports.getGovernorats = async (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Erreur lors de la récupération des gouvernorats',
+      details: err.message
+    });
+  }
+};
+
+// Get all secteurs
+exports.getSecteurs = async (req, res) => {
+  try {
+    const secteurs = await Secteur.find()
+      .populate('categories', 'name image subcategories')
+      .select('name description image')
+      .sort({ name: 1 });
+    res.json({ success: true, secteurs });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: 'Erreur lors de la récupération des secteurs',
+      details: err.message
+    });
+  }
+};
+
+// Get secteur by ID
+exports.getSecteurById = async (req, res) => {
+  try {
+    const { secteurId } = req.params;
+    const secteur = await Secteur.findById(secteurId)
+      .populate({
+        path: 'categories',
+        select: 'name image subcategories',
+        populate: {
+          path: 'subcategories',
+          select: 'name image'
+        }
+      });
+    
+    if (!secteur) {
+      return res.status(404).json({
+        success: false,
+        error: 'Secteur non trouvé'
+      });
+    }
+    
+    res.json({ success: true, secteur });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: 'Erreur lors de la récupération du secteur',
+      details: err.message
+    });
+  }
+};
+
+// Get categories by secteur
+exports.getCategoriesBySecteur = async (req, res) => {
+  try {
+    const { secteurId } = req.params;
+    const secteur = await Secteur.findById(secteurId)
+      .populate({
+        path: 'categories',
+        select: 'name image subcategories',
+        populate: {
+          path: 'subcategories',
+          select: 'name image'
+        }
+      });
+    
+    if (!secteur) {
+      return res.status(404).json({
+        success: false,
+        error: 'Secteur non trouvé'
+      });
+    }
+    
+    res.json({ 
+      success: true, 
+      categories: secteur.categories,
+      secteur: { name: secteur.name, _id: secteur._id }
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: 'Erreur lors de la récupération des catégories du secteur',
       details: err.message
     });
   }
