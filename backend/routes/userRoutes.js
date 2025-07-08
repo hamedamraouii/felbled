@@ -7,6 +7,9 @@ const uploadMiddleware = require('../middlewares/uploadMiddleware');
 // Static routes FIRST
 router.get('/governorats', userController.getGovernorats);
 router.get('/categories', userController.getCategories);
+router.get('/secteurs', userController.getSecteurs);
+router.get('/secteurs/:secteurId', userController.getSecteurById);
+router.get('/secteurs/:secteurId/categories', userController.getCategoriesBySecteur);
 
 // Then routes with params
 router.get('/', auth, userController.getAllUsers);
