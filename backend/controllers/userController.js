@@ -449,6 +449,7 @@ exports.updateUser = async (req, res) => {
 
     const cleanedSecteur = cleanSingleObjectId(updateData, 'secteur');
     if (cleanedSecteur) updateData.secteur = cleanedSecteur;
+    else if (updateData.hasOwnProperty('secteur')) delete updateData.secteur;
 
     // Same validation logic as create...
     if (updateData.gouvernorat && updateData.gouvernorat !== user.gouvernorat?.toString()) {
