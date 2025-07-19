@@ -1,6 +1,7 @@
 const { cloudinary } = require('../utils/cloudinary');
 const Category = require('../models/category');
 const SubCategory = require('../models/SubCategory');
+const Secteur = require('../models/secteur');
 const mongoose = require('mongoose');
 
 const uploadToCloudinary = (buffer, options = {}) => {
@@ -35,13 +36,10 @@ const cleanSubCategoryIds = (data, fieldName) => {
   
   let values = data[fieldName];
   
-  // Si c'est une chaîne, essayer de la parser
   if (typeof values === 'string') {
     try {
-      // Essayer de parser comme JSON d'abord
       values = JSON.parse(values);
     } catch (e) {
-      // Si ce n'est pas du JSON, traiter comme chaîne séparée par des virgules
       const cleaned = values.replace(/[\[\]"'`]/g, '').trim();
       if (cleaned.includes(',')) {
         values = cleaned.split(',').map(v => v.trim());
@@ -51,12 +49,10 @@ const cleanSubCategoryIds = (data, fieldName) => {
     }
   }
   
-  // Assurer que c'est un tableau
   if (!Array.isArray(values)) {
     values = [values];
   }
   
-  // Filtrer et valider les ObjectIds
   const validIds = values
     .map(id => {
       if (typeof id === 'string') {
@@ -73,9 +69,16 @@ const cleanSubCategoryIds = (data, fieldName) => {
   return validIds.length > 0 ? validIds : null;
 };
 
+// Ajout d'un filtre par secteur (secteur=ObjectId) sur /api/categories
 exports.getAllCategories = async (req, res) => {
   try {
-    const categories = await Category.find()
+    const filter = {};
+   
+    if (req.query.secteur && mongoose.Types.ObjectId.isValid(req.query.secteur)) {
+      filter.secteur = req.query.secteur;
+    }
+    const categories = await Category.find(filter)
+      .populate('secteur', 'name')
       .populate('subcategories', 'name image')
       .select('-__v');
     res.json({
@@ -96,6 +99,7 @@ exports.getAllCategories = async (req, res) => {
 exports.getCategorieById = async (req, res) => {
   try {
     const category = await Category.findById(req.params.id)
+      .populate('secteur', 'name')
       .populate('subcategories', 'name image')
       .select('-__v');
     if (!category) {
@@ -133,7 +137,7 @@ exports.getSubCategoriesByCategory = async (req, res) => {
     const subcategories = await SubCategory.find({ category: categoryId })
       .select('name image')
       .sort({ name: 1 });
-    
+    console.log('Recherche sous-catégories pour la catégorie', categoryId, 'Résultat:', subcategories);
     res.json({
       success: true,
       subcategories
@@ -150,21 +154,33 @@ exports.getSubCategoriesByCategory = async (req, res) => {
 
 exports.createCategory = async (req, res) => {
   try {
-    console.log('Création catégorie - Body:', req.body);
-    console.log('Création catégorie - Files:', req.files);
-
     const categoryData = { ...req.body };
     const files = req.files;
 
+    // 1. Require secteur in request body
+    if (!categoryData.secteur || !mongoose.Types.ObjectId.isValid(categoryData.secteur)) {
+      return res.status(400).json({
+        success: false,
+        error: "Le secteur est obligatoire et doit être un ObjectId valide."
+      });
+    }
+
+    // 2. Check if secteur exists
+    const secteur = await Secteur.findById(categoryData.secteur);
+    if (!secteur) {
+      return res.status(404).json({
+        success: false,
+        error: "Secteur non trouvé."
+      });
+    }
+
     // Nettoyage des sous-catégories si elles sont envoyées
-    console.log('Avant nettoyage - subcategories:', categoryData.subcategories);
     const cleanedSubCategories = cleanSubCategoryIds(categoryData, 'subcategories');
     if (cleanedSubCategories) {
       categoryData.subcategories = cleanedSubCategories;
     } else {
-      delete categoryData.subcategories; // Supprimer si invalide ou vide
+      delete categoryData.subcategories;
     }
-    console.log('Après nettoyage - subcategories:', categoryData.subcategories);
 
     // Vérification que les sous-catégories existent si elles sont fournies
     if (categoryData.subcategories && categoryData.subcategories.length > 0) {
@@ -179,7 +195,6 @@ exports.createCategory = async (req, res) => {
         });
       }
 
-      // Vérifier que toutes les sous-catégories n'appartiennent pas déjà à une autre catégorie
       const subcategoriesWithCategory = subcategoriesExist.filter(subcategory => 
         subcategory.category && subcategory.category.toString() !== 'temp'
       );
@@ -194,7 +209,6 @@ exports.createCategory = async (req, res) => {
 
     // Traitement de l'image
     if (files?.image && files.image[0]) {
-      console.log('Upload de l\'image...');
       const imageResult = await uploadToCloudinary(files.image[0].buffer, {
         transformation: [{ width: 800, height: 600, crop: 'limit' }]
       });
@@ -205,16 +219,18 @@ exports.createCategory = async (req, res) => {
         format: imageResult.format
       };
       
-      // Pour la compatibilité avec le modèle existant
       categoryData.image_url = imageResult.secure_url;
-      console.log('Image uploadée:', categoryData.image);
     }
-
-    console.log('Données finales avant création:', categoryData);
 
     // Création de la catégorie
     const newCategory = new Category(categoryData);
     await newCategory.save();
+
+    // Ajouter la catégorie au secteur
+    if (!secteur.categories.includes(newCategory._id)) {
+      secteur.categories.push(newCategory._id);
+      await secteur.save();
+    }
 
     // Mise à jour des sous-catégories pour qu'elles référencent cette catégorie
     if (categoryData.subcategories && categoryData.subcategories.length > 0) {
@@ -226,9 +242,9 @@ exports.createCategory = async (req, res) => {
 
     // Récupération de la catégorie avec les sous-catégories peuplées
     const populatedCategory = await Category.findById(newCategory._id)
+      .populate('secteur', 'name')
       .populate('subcategories', 'name image');
 
-    console.log('Catégorie créée avec succès');
     res.status(201).json({
       success: true,
       message: 'Catégorie créée avec succès',
@@ -238,7 +254,6 @@ exports.createCategory = async (req, res) => {
   } catch (err) {
     console.error('Erreur createCategory:', err);
     
-    // Gestion spécifique des erreurs
     if (err.name === 'ValidationError') {
       const errors = Object.values(err.errors).map(error => ({
         field: error.path,
@@ -263,10 +278,6 @@ exports.createCategory = async (req, res) => {
 
 exports.updateCategory = async (req, res) => {
   try {
-    console.log('Mise à jour catégorie - ID:', req.params.id);
-    console.log('Mise à jour catégorie - Body:', req.body);
-    console.log('Mise à jour catégorie - Files:', req.files);
-
     const category = await Category.findById(req.params.id);
     if (!category) {
       return res.status(404).json({ 
@@ -278,13 +289,24 @@ exports.updateCategory = async (req, res) => {
     const updateData = { ...req.body };
     const files = req.files;
 
+    // Si on souhaite mettre à jour le secteur
+    if (updateData.secteur && mongoose.Types.ObjectId.isValid(updateData.secteur)) {
+      const secteur = await Secteur.findById(updateData.secteur);
+      if (!secteur) {
+        return res.status(404).json({
+          success: false,
+          error: "Secteur non trouvé."
+        });
+      }
+    }
+
     // Nettoyage des sous-catégories si elles sont envoyées
     const cleanedSubCategories = cleanSubCategoryIds(updateData, 'subcategories');
     if (cleanedSubCategories) {
       updateData.subcategories = cleanedSubCategories;
     }
 
-    // Vérification que les nouvelles sous-catégories existent
+    // Vérification des nouvelles sous-catégories
     if (updateData.subcategories && updateData.subcategories.length > 0) {
       const subcategoriesExist = await SubCategory.find({
         _id: { $in: updateData.subcategories }
@@ -297,7 +319,6 @@ exports.updateCategory = async (req, res) => {
         });
       }
 
-      // Vérifier que les sous-catégories n'appartiennent pas déjà à une autre catégorie
       const subcategoriesWithOtherCategory = subcategoriesExist.filter(subcategory => 
         subcategory.category && 
         subcategory.category.toString() !== req.params.id &&
@@ -314,7 +335,6 @@ exports.updateCategory = async (req, res) => {
 
     // Gestion de l'image
     if (files?.image && files.image[0]) {
-      // Suppression de l'ancienne image si elle existe
       if (category.image?.public_id) {
         await deleteCloudinaryMedia(category.image.public_id);
       }
@@ -329,7 +349,6 @@ exports.updateCategory = async (req, res) => {
         format: imageResult.format
       };
       
-      // Pour la compatibilité avec le modèle existant
       updateData.image_url = imageResult.secure_url;
     }
 
@@ -343,12 +362,12 @@ exports.updateCategory = async (req, res) => {
       updateData,
       { new: true, runValidators: true }
     )
+    .populate('secteur', 'name')
     .populate('subcategories', 'name image')
     .select('-__v');
 
     // Mise à jour des références des sous-catégories
     if (updateData.subcategories) {
-      // Retirer l'ancienne catégorie des sous-catégories qui ne sont plus associées
       const subcategoriesToRemove = oldSubCategoryIds.filter(id => 
         !updateData.subcategories.includes(id)
       );
@@ -360,7 +379,6 @@ exports.updateCategory = async (req, res) => {
         );
       }
 
-      // Assigner la catégorie aux nouvelles sous-catégories
       const subcategoriesToAdd = updateData.subcategories.filter(id => 
         !oldSubCategoryIds.includes(id)
       );
@@ -371,6 +389,22 @@ exports.updateCategory = async (req, res) => {
           { category: req.params.id }
         );
       }
+    }
+
+    // Si le secteur a changé, mettre à jour les références dans les secteurs
+    if (updateData.secteur && updateData.secteur.toString() !== category.secteur?.toString()) {
+      // Enlever de l'ancien secteur
+      if (category.secteur) {
+        await Secteur.findByIdAndUpdate(
+          category.secteur,
+          { $pull: { categories: category._id } }
+        );
+      }
+      // Ajouter au nouveau secteur
+      await Secteur.findByIdAndUpdate(
+        updateData.secteur,
+        { $addToSet: { categories: category._id } }
+      );
     }
 
     res.json({
@@ -415,6 +449,14 @@ exports.deleteCategory = async (req, res) => {
       { category: req.params.id },
       { $unset: { category: 1 } }
     );
+
+    // Retirer la catégorie du secteur
+    if (category.secteur) {
+      await Secteur.findByIdAndUpdate(
+        category.secteur,
+        { $pull: { categories: category._id } }
+      );
+    }
 
     // Suppression de l'image Cloudinary si elle existe
     if (category.image?.public_id) {
@@ -481,6 +523,7 @@ exports.addSubCategoryToCategory = async (req, res) => {
     await subcategory.save();
 
     const updatedCategory = await Category.findById(categoryId)
+      .populate('secteur', 'name')
       .populate('subcategories', 'name image');
 
     res.json({
@@ -541,6 +584,7 @@ exports.removeSubCategoryFromCategory = async (req, res) => {
     await subcategory.save();
 
     const updatedCategory = await Category.findById(categoryId)
+      .populate('secteur', 'name')
       .populate('subcategories', 'name image');
 
     res.json({

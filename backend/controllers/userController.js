@@ -4,6 +4,7 @@ const Delegation = require('../models/Delegation');
 const Category = require('../models/category');
 const SubCategory = require('../models/SubCategory');
 const { cloudinary } = require('../utils/cloudinary');
+const Secteur = require('../models/secteur');
 const mongoose = require('mongoose');
 
 // Helper to upload a file to Cloudinary
@@ -98,7 +99,7 @@ exports.createUser = async (req, res) => {
     const userData = { ...req.body };
     const files = req.files;
 
-    // **CRITICAL FIX: Parse JSON fields BEFORE any processing**
+    // Parse JSON fields
     console.log('=== PARSING JSON FIELDS ===');
     
     // Parse socialmedia
@@ -160,7 +161,7 @@ exports.createUser = async (req, res) => {
     console.log('=== AFTER JSON PARSING ===');
     console.log('Final userData before validation:', userData);
 
-    // Clean data for references (only for ObjectIds)
+    // Clean data for references
     if (userData.categories && Array.isArray(userData.categories)) {
       const cleanedCategories = cleanObjectIds(userData, 'categories');
       if (cleanedCategories) {
@@ -187,7 +188,12 @@ exports.createUser = async (req, res) => {
     if (cleanedDelegation) userData.delegation = cleanedDelegation;
     else delete userData.delegation;
 
-    // Validate references existence (only if they are ObjectIds)
+    // Clean secteur ObjectId
+    const cleanedSecteur = cleanSingleObjectId(userData, 'secteur');
+    if (cleanedSecteur) userData.secteur = cleanedSecteur;
+    else delete userData.secteur;
+
+    // Validate references existence
     if (userData.gouvernorat && mongoose.Types.ObjectId.isValid(userData.gouvernorat)) {
       const gouvernoratExists = await Governorat.findById(userData.gouvernorat);
       if (!gouvernoratExists) {
@@ -211,6 +217,34 @@ exports.createUser = async (req, res) => {
           success: false,
           error: 'La délégation ne correspond pas au gouvernorat sélectionné'
         });
+      }
+    }
+
+    // Validate secteur existence
+    if (userData.secteur && mongoose.Types.ObjectId.isValid(userData.secteur)) {
+      const secteurExists = await Secteur.findById(userData.secteur);
+      if (!secteurExists) {
+        return res.status(400).json({
+          success: false,
+          error: 'Secteur invalide'
+        });
+      }
+    }
+
+    // Validate that categories belong to the selected secteur
+    if (userData.secteur && userData.categories && userData.categories.length > 0) {
+      const secteur = await Secteur.findById(userData.secteur).populate('categories');
+      if (secteur) {
+        const secteurCategoryIds = secteur.categories.map(cat => cat._id.toString());
+        const invalidCategories = userData.categories.filter(catId =>
+          !secteurCategoryIds.includes(catId)
+        );
+        if (invalidCategories.length > 0) {
+          return res.status(400).json({
+            success: false,
+            error: 'Certaines catégories ne correspondent pas au secteur sélectionné'
+          });
+        }
       }
     }
 
@@ -259,7 +293,7 @@ exports.createUser = async (req, res) => {
         url: logoResult.secure_url,
         format: logoResult.format
       };
-      userData.logo_url = logoResult.secure_url; // For backward compatibility
+      userData.logo_url = logoResult.secure_url;
     }
 
     if (files?.images && files.images.length > 0) {
@@ -274,7 +308,7 @@ exports.createUser = async (req, res) => {
         url: result.secure_url,
         format: result.format
       }));
-      userData.images_url = imageResults.map(result => result.secure_url); // For backward compatibility
+      userData.images_url = imageResults.map(result => result.secure_url);
     }
 
     if (files?.video && files.video[0]) {
@@ -282,7 +316,7 @@ exports.createUser = async (req, res) => {
         resource_type: 'video',
         folder: 'felbled/videos'
       });
-      userData.video = videoResult.secure_url; // Store as string URL
+      userData.video = videoResult.secure_url;
     }
 
     console.log('Final userData before creating user:', userData);
@@ -293,6 +327,7 @@ exports.createUser = async (req, res) => {
     const populatedUser = await User.findById(newUser._id)
       .populate('gouvernorat', 'name')
       .populate('delegation', 'name')
+      .populate('secteur', 'name description image')
       .populate('categories', 'name image')
       .populate('subcategories', 'name image');
 
@@ -352,7 +387,7 @@ exports.updateUser = async (req, res) => {
     const updateData = { ...req.body };
     const files = req.files;
 
-    // **CRITICAL FIX: Parse JSON fields BEFORE any processing**
+    // Parse JSON fields
     console.log('=== PARSING JSON FIELDS FOR UPDATE ===');
     
     // Parse socialmedia
@@ -414,7 +449,7 @@ exports.updateUser = async (req, res) => {
     console.log('=== AFTER JSON PARSING FOR UPDATE ===');
     console.log('Final updateData before validation:', updateData);
 
-    // Clean and validate references (same logic as create)
+    // Clean and validate references
     if (updateData.categories && Array.isArray(updateData.categories)) {
       const cleanedCategories = cleanObjectIds(updateData, 'categories');
       if (cleanedCategories) updateData.categories = cleanedCategories;
@@ -431,7 +466,11 @@ exports.updateUser = async (req, res) => {
     const cleanedDelegation = cleanSingleObjectId(updateData, 'delegation');
     if (cleanedDelegation) updateData.delegation = cleanedDelegation;
 
-    // Same validation logic as create...
+    // Clean secteur ObjectId
+    const cleanedSecteurUpdate = cleanSingleObjectId(updateData, 'secteur');
+    if (cleanedSecteurUpdate) updateData.secteur = cleanedSecteurUpdate;
+
+    // Validate references existence
     if (updateData.gouvernorat && updateData.gouvernorat !== user.gouvernorat?.toString()) {
       const gouvernoratExists = await Governorat.findById(updateData.gouvernorat);
       if (!gouvernoratExists) {
@@ -439,6 +478,50 @@ exports.updateUser = async (req, res) => {
           success: false,
           error: 'Gouvernorat invalide'
         });
+      }
+    }
+
+    if (updateData.delegation && updateData.delegation !== user.delegation?.toString()) {
+      const delegationExists = await Delegation.findById(updateData.delegation);
+      if (!delegationExists) {
+        return res.status(400).json({
+          success: false,
+          error: 'Délégation invalide'
+        });
+      }
+      if (updateData.gouvernorat && delegationExists.gouvernorat.toString() !== updateData.gouvernorat) {
+        return res.status(400).json({
+          success: false,
+          error: 'La délégation ne correspond pas au gouvernorat sélectionné'
+        });
+      }
+    }
+
+    // Validate secteur existence (if changed)
+    if (updateData.secteur && mongoose.Types.ObjectId.isValid(updateData.secteur)) {
+      const secteurExists = await Secteur.findById(updateData.secteur);
+      if (!secteurExists) {
+        return res.status(400).json({
+          success: false,
+          error: 'Secteur invalide'
+        });
+      }
+    }
+
+    // Validate that categories belong to the selected secteur (if both are being updated)
+    if (updateData.secteur && updateData.categories && updateData.categories.length > 0) {
+      const secteur = await Secteur.findById(updateData.secteur).populate('categories');
+      if (secteur) {
+        const secteurCategoryIds = secteur.categories.map(cat => cat._id.toString());
+        const invalidCategories = updateData.categories.filter(catId =>
+          !secteurCategoryIds.includes(catId)
+        );
+        if (invalidCategories.length > 0) {
+          return res.status(400).json({
+            success: false,
+            error: 'Certaines catégories ne correspondent pas au secteur sélectionné'
+          });
+        }
       }
     }
 
@@ -477,7 +560,6 @@ exports.updateUser = async (req, res) => {
     }
 
     if (files?.video && files.video[0]) {
-      // If there's an old video, try to delete it
       if (user.video && typeof user.video === 'object' && user.video.public_id) {
         await deleteCloudinaryMedia(user.video.public_id, 'video');
       }
@@ -485,7 +567,7 @@ exports.updateUser = async (req, res) => {
         resource_type: 'video',
         folder: 'felbled/videos'
       });
-      updateData.video = videoResult.secure_url; // Store as string
+      updateData.video = videoResult.secure_url;
     }
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -495,6 +577,7 @@ exports.updateUser = async (req, res) => {
     )
       .populate('gouvernorat', 'name')
       .populate('delegation', 'name')
+      .populate('secteur', 'name description image')
       .populate('categories', 'name image')
       .populate('subcategories', 'name image')
       .select('-__v');
@@ -533,7 +616,6 @@ exports.deleteUser = async (req, res) => {
         if (img.public_id) deletePromises.push(deleteCloudinaryMedia(img.public_id));
       });
     }
-    // Handle video deletion - check if it's an object with public_id
     if (user.video && typeof user.video === 'object' && user.video.public_id) {
       deletePromises.push(deleteCloudinaryMedia(user.video.public_id, 'video'));
     }
@@ -606,20 +688,19 @@ exports.getCategories = async (req, res) => {
 };
 
 // Get all users
-// Dans votre fonction getAllUsers, assurez-vous d'avoir ceci :
-
 exports.getAllUsers = async (req, res) => {
   try {
     console.log('Fetching users with populated data...');
     
     const users = await User.find()
-      .populate('gouvernorat', 'name') // IMPORTANT: Populate avec le nom
-      .populate('delegation', 'name')  // IMPORTANT: Populate avec le nom
+      .populate('gouvernorat', 'name')
+      .populate('delegation', 'name')
+      .populate('secteur', 'name description image')
       .populate('categories', 'name image')
       .populate('subcategories', 'name image')
       .select('-__v');
     
-    console.log('Sample user data:', users[0]); // Debug premier utilisateur
+    console.log('Sample user data:', users[0]);
     
     res.json({
       success: true,
@@ -642,6 +723,7 @@ exports.getUserById = async (req, res) => {
     const user = await User.findById(req.params.id)
       .populate('gouvernorat', 'name')
       .populate('delegation', 'name')
+      .populate('secteur', 'name description image')
       .populate('categories', 'name image')
       .populate('subcategories', 'name image')
       .select('-__v');
@@ -675,5 +757,189 @@ exports.getGovernorats = async (req, res) => {
       error: 'Erreur lors de la récupération des gouvernorats',
       details: err.message
     });
+  }
+};
+// Get subcategories by secteur
+exports.getSubCategoriesBySecteur = async (req, res) => {
+  try {
+    const { secteurId } = req.params;
+    const secteur = await Secteur.findById(secteurId)
+      .populate({
+        path: 'categories',
+        populate: { path: 'subcategories', select: 'name image' },
+        select: 'name subcategories'
+      });
+    if (!secteur) {
+      return res.status(404).json({
+        success: false,
+        error: 'Secteur non trouvé'
+      });
+    }
+    // Flatten all subcategories from all categories
+    const subcategories = secteur.categories.flatMap(cat => cat.subcategories || []);
+    res.json({ success: true, subcategories });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: 'Erreur lors de la récupération des sous-catégories',
+      details: err.message
+    });
+  }
+};
+
+exports.getSecteurs = async (req, res) => {
+  try {
+    const secteurs = await Secteur.find()
+      .populate('categories', 'name image')
+      .select('name description image categories')
+      .sort({ name: 1 });
+    res.json({ success: true, secteurs });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: 'Erreur lors de la récupération des secteurs',
+      details: err.message
+    });
+  }
+};
+exports.getUsersBySubCategory = async (req, res) => {
+  try {
+    const { subcategoryId } = req.params;
+    const { gouvernorat } = req.query;
+    console.log('[getUsersBySubCategory] subcategoryId:', subcategoryId, 'gouvernorat:', gouvernorat);
+    let filter = { subcategories: subcategoryId };
+    if (gouvernorat) {
+      // Chercher l'ObjectId du gouvernorat à partir de son nom (insensible à la casse)
+      const gov = await Governorat.findOne({ name: { $regex: `^${gouvernorat}$`, $options: 'i' } });
+      if (gov) {
+        filter.gouvernorat = gov._id;
+      } else {
+        // Aucun gouvernorat trouvé, retourner une liste vide
+        return res.json({ success: true, users: [] });
+      }
+    }
+    const users = await User.find(filter)
+      .populate('gouvernorat', 'name')
+      .populate('delegation', 'name');
+    console.log('[getUsersBySubCategory] users found:', users.length);
+    if (users.length > 0) {
+      console.log('[getUsersBySubCategory] user IDs:', users.map(u => u._id.toString()));
+    }
+    res.json({ success: true, users });
+  } catch (err) {
+    console.error('[getUsersBySubCategory] error:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+};
+// Get categories by secteur
+exports.getCategoriesBySecteur = async (req, res) => {
+  try {
+    const { secteurId } = req.params;
+    const secteur = await Secteur.findById(secteurId).populate('categories', 'name image');
+    if (!secteur) {
+      return res.status(404).json({
+        success: false,
+        error: 'Secteur non trouvé'
+      });
+    }
+    res.json({ success: true, categories: secteur.categories });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: 'Erreur lors de la récupération des catégories',
+      details: err.message
+    });
+  }
+};
+
+// Search users by query (name, secteur, etc.
+exports.searchUsers = async (req, res) => {
+  try {
+    const { q, secteur, gouvernorat, keyword } = req.method === 'POST' ? req.body : req.query;
+    const filter = {};
+    if (q) {
+      filter.$or = [
+        { name: { $regex: q, $options: 'i' } },
+        { email: { $regex: q, $options: 'i' } }
+      ];
+    }
+    // Mot clé similarity filter
+    if (keyword && keyword.trim() !== "") {
+      const regex = new RegExp(keyword, "i");
+      if (!filter.$or) filter.$or = [];
+      filter.$or.push(
+        { name: regex },
+        { description: regex }
+      );
+      // Secteur name similarity (need to find matching secteur ObjectIds)
+      const matchingSecteurs = await Secteur.find({ name: { $regex: regex } }, '_id');
+      if (matchingSecteurs.length > 0) {
+        filter.$or.push({ secteur: { $in: matchingSecteurs.map(s => s._id) } });
+      }
+      // You can add more fields here if needed
+    }
+    // Resolve secteur name to ObjectId if needed
+    if (secteur) {
+      let secteurId = secteur;
+      if (!secteur.match(/^[0-9a-fA-F]{24}$/)) {
+        const secteurDoc = await Secteur.findOne({ name: { $regex: `^${secteur}$`, $options: 'i' } });
+        if (secteurDoc) secteurId = secteurDoc._id;
+      }
+      filter.secteur = secteurId;
+    }
+    // Resolve gouvernorat name to ObjectId if needed
+    if (gouvernorat) {
+      let gouvernoratId = gouvernorat;
+      if (!gouvernorat.match(/^[0-9a-fA-F]{24}$/)) {
+        const gouvernoratDoc = await Governorat.findOne({ name: { $regex: `^${gouvernorat}$`, $options: 'i' } });
+        if (gouvernoratDoc) gouvernoratId = gouvernoratDoc._id;
+      }
+      filter.gouvernorat = gouvernoratId;
+    }
+    // If mot clé is present, use aggregation to match secteur name
+    if (keyword && keyword.trim() !== "") {
+      const regex = new RegExp(keyword, "i");
+      const pipeline = [
+        { $match: filter },
+        {
+          $lookup: {
+            from: "secteurs",
+            localField: "secteur",
+            foreignField: "_id",
+            as: "secteurObj"
+          }
+        },
+        {
+          $match: {
+            $or: [
+              { name: { $regex: regex } },
+              { description: { $regex: regex } },
+              { "secteurObj.name": { $regex: regex } }
+            ]
+          }
+        }
+      ];
+      let users = await User.aggregate(pipeline);
+      // Populate gouvernorat and delegation for each user
+      users = await User.populate(users, [
+        { path: 'gouvernorat', select: 'name' },
+        { path: 'delegation', select: 'name' },
+        { path: 'secteur', select: 'name description image' },
+        { path: 'categories', select: 'name image' },
+        { path: 'subcategories', select: 'name image' }
+      ]);
+      res.json({ success: true, users });
+      return;
+    }
+    // Default: no mot clé, use normal find
+    const users = await User.find(filter)
+      .populate('gouvernorat', 'name')
+      .populate('delegation', 'name')
+      .populate('secteur', 'name description image')
+      .populate('categories', 'name image')
+      .populate('subcategories', 'name image');
+    res.json({ success: true, users });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
   }
 };

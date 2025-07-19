@@ -35,36 +35,45 @@ const userSchema = new Schema({
   latitude: { type: String, default: null },
   longitude: { type: String, default: null },
   
-  // Address fields - FIXED: These should reference ObjectIds or be strings
-  gouvernorat: { 
-    type: Schema.Types.Mixed, // Can be ObjectId or String
-    default: null 
-  }, 
+  // Address fields - now reference ObjectIds for consistency
+  gouvernorat: {
+    type: Schema.Types.ObjectId,
+    ref: 'Governorat',
+    default: null
+  },
   pays: { type: String, default: null },
-  delegation: { 
-    type: Schema.Types.Mixed, // Can be ObjectId or String
-    default: null 
+  delegation: {
+    type: Schema.Types.ObjectId,
+    ref: 'Delegation',
+    default: null
   },
   address: { type: String, default: null },
   
   // Business info
   activité: { type: String, default: null },
-  secteur: { type: String, default: null },
+  
+  // CHANGED: secteur is now a reference to Secteur model
+  secteur: {
+    type: Schema.Types.ObjectId,
+    ref: 'Secteur',
+    default: null
+  },
+  
   description: { type: String, default: null },
   telephone: { type: String, default: null },
   horaire: { type: String, default: null },
   
-  // Categories - FIXED: Make both compatible
-  category: { type: [String], default: [] }, 
-  categories: [{ 
-    type: Schema.Types.Mixed, 
-    ref: 'Category', 
-    default: undefined // Changed from [] to undefined
-  }], 
-  subcategories: [{ 
-    type: Schema.Types.Mixed, 
-    ref: 'SubCategory', 
-    default: undefined // Changed from [] to undefined
+  // Categories - now reference ObjectIds for consistency
+  category: { type: [String], default: [] }, // keep for backward compatibility
+  categories: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Category',
+    default: undefined
+  }],
+  subcategories: [{
+    type: Schema.Types.ObjectId,
+    ref: 'SubCategory',
+    default: undefined
   }],
   
   // Tags and social media
@@ -92,5 +101,6 @@ userSchema.virtual('imageUrls').get(function() {
 // Indexes
 userSchema.index({ gouvernorat: 1, delegation: 1 });
 userSchema.index({ activité: 1, secteur: 1 });
+userSchema.index({ secteur: 1 });
 
 module.exports = mongoose.model('User', userSchema);

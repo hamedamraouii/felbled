@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import './Categories.css';
 import Footer from "../Footer";
-import Search from "./Search";
+import Search from "../components/search/Search";
 import { useTranslation } from 'react-i18next';
 
 const SousCategories = () => {
@@ -18,18 +18,24 @@ const SousCategories = () => {
   const [gouvernoratLabel, setGouvernoratLabel] = useState(gouvernoratName);
   const [selectedDelegations, setSelectedDelegations] = useState([]);
 
-  // Charger les fichiers JSON dynamiquement
+  // Charger les données depuis l'API
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [categoriesRes, gouvernoratsRes] = await Promise.all([
-          fetch('/data/Categories.json'),
-          fetch('/data/Gouvernorats.json')
+          fetch('/api/categories'),
+          fetch('/api/gouvernorats')
         ]);
-        const categoriesJson = await categoriesRes.json();
-        const gouvernoratsJson = await gouvernoratsRes.json();
-        setCategories(categoriesJson);
-        setGouvernorats(gouvernoratsJson);
+        
+        const categoriesData = await categoriesRes.json();
+        const gouvernoratsData = await gouvernoratsRes.json();
+        
+        if (categoriesData.success) {
+          setCategories(categoriesData.data);
+        }
+        if (gouvernoratsData.success) {
+          setGouvernorats(gouvernoratsData.data);
+        }
       } catch (error) {
         console.error('Erreur lors du chargement des données:', error);
       }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
-import Search from "../Gouvernorats/Search";
+import Search from "../components/search/Search";
 import Pays from "./Pays";
 import Carousel from "./AboutUs";
 import ContactUs from "./ContactUs";

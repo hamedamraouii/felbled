@@ -1,4 +1,4 @@
-{
+{ 
   "name": "felblad",
   "version": "0.1.0",
   "homepage": ".",
@@ -68,5 +68,6 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "proxy": "http://localhost:5000"
 }

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const governoratSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  image_url: String, // pour l'affichage rapide
+  name: { type: String, required: true, unique: true, trim: true },
+  image_url: { type: String }, 
   image: {
     public_id: String,
     url: String,
@@ -12,6 +12,8 @@ const governoratSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Delegation'
   }]
+}, {
+  timestamps: true
 });
 
 module.exports = mongoose.model('Governorat', governoratSchema);

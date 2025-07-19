@@ -4,8 +4,8 @@ const subcategoryController = require('../controllers/subcategoryController');
 const auth = require('../middlewares/authMiddleware');
 const uploadMiddleware = require('../middlewares/uploadMiddleware');
 
-router.get('/', auth, subcategoryController.getAllSubCategories);
-router.get('/:id', auth, subcategoryController.getSubCategoryById);
+router.get('/',  subcategoryController.getAllSubCategories);
+router.get('/:id',subcategoryController.getSubCategoryById);
 router.post('/', auth, uploadMiddleware, subcategoryController.createSubCategory);
 router.put('/:id', auth, uploadMiddleware, subcategoryController.updateSubCategory); 
 router.delete('/:id', auth, subcategoryController.deleteSubCategory);

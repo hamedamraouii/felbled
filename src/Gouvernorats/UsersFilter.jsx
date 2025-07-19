@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import './users.css';
 import Footer from "../Footer";
-import Search from "./Search";
+import Search from "../components/search/Search";
 
 
 
@@ -22,15 +22,21 @@ import Search from "./Search";
     // State to track how many users to show
     const [usersToShow, setUsersToShow] = useState(12); // Start with 8 items displayed
     useEffect(() => {
-      fetch("/data/users.json")
+      fetch("/api/users")
         .then((response) => response.json())
-        .then((json) => setUsers(json))
-        .catch((error) => console.error("Erreur lors du chargement du fichier JSON:", error));
-        console.log(users);
+        .then((data) => {
+          if (data.success) {
+            setUsers(data.data);
+          } else {
+            console.error("Erreur lors du chargement des utilisateurs:", data.error);
+          }
+        })
+        .catch((error) => console.error("Erreur lors du chargement des utilisateurs:", error));
     }, []);
   
     // Filter users based on search parameters and selected delegations
-    const filteredUsers = users.filter((user) => {
+    const safeUsers = Array.isArray(users) ? users : [];
+    const filteredUsers = safeUsers.filter((user) => {
       console.log( user);
       //const matchesCountry = searchParams.country
      //   ? user.pays.toLowerCase().includes(searchParams.country.toLowerCase())

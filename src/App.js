@@ -1,20 +1,27 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
+import UsersList from "./components/users/UsersList.jsx";
 import HomePage from "./HomePage/HomePage";
-import Gouvernorats from "./Gouvernorats/Gouvernorats.jsx";
+
 import SousCategorie from "./Gouvernorats/SousCategorie.jsx";
 import Subcategories2 from "./Gouvernorats/SousCategorie2.jsx";
-import Activities from "./Gouvernorats/Activities.jsx";
+
 import OneUser from "./Gouvernorats/OneUser.jsx";
 import Users from "./Gouvernorats/Users";
-import UsersFilter from "./Gouvernorats/UsersFilter.jsx";
-import OneUserUpdate from "./Gouvernorats/Update.jsx";
+import SearchResult from "./components/SearchResult.jsx";
+
 import SideBar from "./App.jsx";
-import Connect from "./HomePage/Login";
+
+import ApiTest from "./ApiTest.jsx";
 import { Helmet } from 'react-helmet';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import GouvernoratsList from "./components/gouvernorats/GouvernoratsList.jsx";
+import SecteursList from "./components/secteurs/SecteursList.jsx";
+import CategorieList from "./components/categories/CategorieList.jsx";
+import SousCategorieList from "./components/souscategories/SousCategorieList.jsx";
+import UserDetails from "./components/users/UserDetails.jsx";
 
 const AppContent = () => {
   return (
@@ -33,18 +40,25 @@ const AppContent = () => {
       {/* Main Content */}
       <div className="content">
         <Routes>
+          {/* Test API route */}
+          <Route path="/test-api" element={<ApiTest />} />
           {/* Most specific routes first */}
+          <Route path="/users/subcategories/:subcategoryId" element={<UsersList />} />
+          <Route path="/users/gouvernorat/:gouvernoratName/subcategories/:subcategoryId" element={<UsersList />} />
+          <Route path="/user/:userId" element={<UserDetails />} />
           <Route path="/tunisie/:gouvernoratName/:subcategory/:userName" element={<OneUser />} />
           <Route path="/tunisie/:gouvernoratName/:subcategory" element={<Users />} />
           <Route path="/tunisie/:gouvernoratName/:subcategory/sub" element={<Subcategories2 />} />
           <Route path="/tunisie/:gouvernoratName/:categoryName/cat" element={<SousCategorie />} />
           
           
-          <Route path="/tunisie/:gouvernoratName" element={<Activities />} />
-          <Route path="/tunisie" element={<Gouvernorats />}/>
+          <Route path="/tunisie/:gouvernoratName" element={<SecteursList />}/>
+          <Route path="/tunisie" element={<GouvernoratsList />}/>
           {/* Generic routes */}
-          <Route path="/searchresult" element={<UsersFilter />} />
+          <Route path="/searchresult" element={<SearchResult />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/tunisie/:gouvernoratName/:secteurName/categories" element={<CategorieList />} />
+          <Route path="/tunisie/:gouvernoratName/:secteurName/categories/:categoryId/souscategories" element={<SousCategorieList />} />
         </Routes>
       </div>
     </div>

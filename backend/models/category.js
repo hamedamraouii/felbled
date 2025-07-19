@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const CategorySchema = new mongoose.Schema({
   name: { type: String, required: true },
+   secteur: { type: mongoose.Schema.Types.ObjectId, ref: 'Secteur', required: true },
   image_url: String, 
   image: {
     public_id: String,

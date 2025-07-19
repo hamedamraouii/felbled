@@ -6,8 +6,17 @@ const uploadMiddleware = require('../middlewares/uploadMiddleware');
 
 
 router.post('/', auth, uploadMiddleware, gouvernoratController.createGouvernorat);
-router.get('/',auth,gouvernoratController.getAllGouvernorats);
-router.get('/:id',auth,gouvernoratController.getGouvernoratById);
+router.get('/',gouvernoratController.getAllGouvernorats);
+router.get('/simple', async (req, res) => {
+  try {
+    const Gouvernorat = require('../models/governorat');
+    const gouvernorats = await Gouvernorat.find({}, 'name image_url image delegations');
+    res.json({ success: true, gouvernorats });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+router.get('/:id',gouvernoratController.getGouvernoratById);
 router.put('/:id',auth,uploadMiddleware,gouvernoratController.updateGouvernorat);
 router.delete('/:id',auth,gouvernoratController.deleteGouvernorat);
 

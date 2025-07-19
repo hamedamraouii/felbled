@@ -20,23 +20,22 @@
     width: 100%; 
   }
   
-  .item-container-gouv {
-    width: calc(25% - 20px);
-    margin: 10px 0; 
+.item-container-gouv {
+    flex: 0 0 calc(16.66% - 20px); /* 6 items per row, fix flex-basis */
+    max-width: calc(16.66% - 20px);
+    margin: 16px 0;
     position: relative;
-  }
+}
   
-  .image-container-gouv {
+.image-container-gouv {
     position: relative;
     width: 100%;
-    height: 0;
-    padding-bottom: 100%; 
+    height: 150px;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    cursor: pointer; 
-    
-  }
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
   
   .image-gouv {
     position: absolute;
@@ -175,20 +174,16 @@
 
 /* Desktop version styles */
 @media (min-width: 1025px) {
-
   .item-container-gouv {
-    width: calc(25% - 20px); 
+    width: calc(16.66% - 20px); /* 6 items per row */
   }
-
-
   .ad-container-left-gouv,
   .ad-container-right-gouv {
-    width: 300px; 
-    margin: 0 30px; 
+    width: 300px;
+    margin: 0 30px;
   }
-
   .list-container-gouv {
-    width: 100%; 
+    width: 100%;
   }
 }
 
@@ -204,17 +199,13 @@
 .list-container-gouv {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 0 12px;
   padding: 10px;
   width: 100%;
 }
 
-/* Display 6 items per row */
-.item-container-gouv {
-  width: calc(16.66% - 20px); /* 6 items per row */
-  margin: 10px 0;
-  position: relative;
-}
+/* Supprimé: 6 items per row override */
 
 @media (max-width: 1024px) {
   .item-container-gouv {
@@ -270,12 +261,7 @@
   width: 100%;
 }
 
-/* Item container for 6 items per row */
-.item-container-gouv {
-  width: calc(16.66% - 20px); /* 6 items per row */
-  margin: 10px 0;
-  position: relative;
-}
+/* Supprimé: 6 items per row override */
 
 @media (max-width: 1024px) {
   .item-container-gouv {

@@ -12,7 +12,7 @@ const AdSlider = ({ orientation = "vertical" }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % publicites.length);
-    }, 4000); // Change chaque 4s
+    }, 4000); 
     return () => clearInterval(interval);
   }, [publicites.length]);
 

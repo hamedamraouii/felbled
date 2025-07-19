@@ -5,11 +5,20 @@ import Footer from "../Footer";
 import Search from "./Search";
 import { useTranslation } from "react-i18next";
 import AdSlider from "./AdSlider";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faWrench } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faBriefcase, 
+  faUmbrellaBeach, 
+  faVanShuttle, 
+  faBellConcierge 
+} from '@fortawesome/free-solid-svg-icons';
 
 const categories = {
   1: {
     category: "SANTÉ",
-    image: "SANTE1.webp",
+    image: "SANTE1.jpeg",
     subcategories: [
       {
         name: "medecins",
@@ -243,7 +252,7 @@ const categories = {
   },
   2: {
     category: "DROIT",
-    image: "droit.webp",
+    image: "DROIT.webp",
     subcategories: [
       {
         name: "Avocats",
@@ -282,13 +291,13 @@ const categories = {
       },
       {
         name: "Conseiller juridique d'entreprise",
-        image: "Conseiller juridique d'entreprise.webp",
+        image: "Conseillerjuridiquedentreprise.webp",
       },
     ],
   },
   3: {
     category: "BÂTIMENT",
-    image: "BÂTIMENT1.webp",
+    image: "BATIMENT1.webp",
     subcategories: [
       {
         name: "Architecte",
@@ -300,7 +309,7 @@ const categories = {
       },
       {
         name: "Architecte de l'intérieur",
-        image: "Architecte de l'intérieur.webp",
+        image: "Architectedelinterieur.webp",
       },
       {
         name: "Génie civil",
@@ -348,7 +357,7 @@ const categories = {
   },
   4: {
     category: "SHOPPING",
-    image: "SHOPPING1.webp",
+    image: "SHOPPING.webp",
     subcategories: [
       {
         name: "Hommes",
@@ -356,15 +365,15 @@ const categories = {
         subcategories: [
           {
             name: "Prêt à porter homme",
-            image: "Prêt à porter Homme.webp",
+            image: "PRETHOMME.webp",
           },
           {
             name: "Accessoires homme",
-            image: "Accessoires Homme.webp",
+            image: "ACCHOMME.webp",
           },
           {
             name: "Chaussures homme",
-            image: "Chaussures Homme.webp",
+            image: "CHAUSSHOMME.webp",
           },
         ],
       },
@@ -392,7 +401,7 @@ const categories = {
         subcategories: [
           {
             name: "Prêt à porter enfant",
-            image: "Prêt à porter Enfant.webp",
+            image: "PRETENFANT.webp",
           },
           {
             name: "Accessoires enfant",
@@ -497,7 +506,7 @@ const categories = {
       },
       {
         name: "Électricien",
-        image: "electricien.webp",
+        image: "ELECTRICIENN.webp",
       },
       {
         name: "peintre",
@@ -579,7 +588,7 @@ const categories = {
       },
       {
         name: "Parabole",
-        image: "Parabole.webp",
+        image: "PARABOLEE.webp",
       },
       {
         name: "Soudeur",
@@ -907,8 +916,12 @@ const categories = {
 
       {
         name: "Centre d'handicapés",
-        image: "Centre d'handicapés.jpeg",
+        image: "CENTREEEE.jpeg",
       },
+      {
+        "name":"E-Learning",
+        "image": "ElEARNING.jpg"
+      }
     ],
   },
   11: {
@@ -2141,6 +2154,9 @@ const Categories = () => {
     }
   }
   let url = `https://felbled.com/tunisie/${gouvernoratName.toLowerCase()}/métiers/cat`;
+  let url2 = `https://felbled.com/tunisie/${gouvernoratName.toLowerCase()}/shopping/cat`;
+  
+ 
 
   const handleCheckboxChange = (delegation) => {
     setSelectedDelegations((prev) =>
@@ -2172,21 +2188,52 @@ const Categories = () => {
       }
     );
   };
-
+  
   if (!gouvernoratData) {
     return <div>No data available for this gouvernorat.</div>;
   }
+  const handleQuickLinkClick = (type) => {
+  const path = `/tunisie/${gouvernoratLabel.toLowerCase()}/${type}/cat`;
+
+  navigate(path, {
+    state: {
+      gouvernoratName: gouvernoratLabel,
+      gouvernoratData,
+    },
+  });
+};
 
   return (
     <div className="container-column">
       <div className="container-cat">
         {/* Left Section: Delegations List */}
         <div className="left-section-cat">
-          <div>
-            <a href={url} target="_blank">
-              Métiers
-            </a>{" "}
+          <div className="quick-links-cat">
+            <h2>Liens rapides</h2>
+            <div className="links-container">
+              <div className="link" onClick={() => handleQuickLinkClick("shopping")}>
+                <h4>SHOPPING</h4>
+                <FontAwesomeIcon icon={faCartShopping} />
+              </div>
+              <div className="link" onClick={() => handleQuickLinkClick("métiers")}>
+                <h4>METIER</h4>
+                <FontAwesomeIcon icon={faWrench} />
+              </div>
+              <div className="link" onClick={() => handleQuickLinkClick("loisir")}>
+                <h4>LOISIR</h4>
+                <FontAwesomeIcon icon={faUmbrellaBeach} />
+              </div>
+              <div className="link" onClick={() => handleQuickLinkClick("transport")}>
+                <h4>TRANSPORT</h4>
+                <FontAwesomeIcon icon={faVanShuttle} />
+              </div>
+              <div className="link" onClick={() => handleQuickLinkClick("services")}>
+                <h4>SERVICES</h4>
+                <FontAwesomeIcon icon={faBellConcierge} />
+              </div>
           </div>
+        </div>
+
           {/*<div className="gouvernaurat-container-cat">
            
               <h3 className="gouvernaurat-title-cat">{gouvernoratName}</h3>
@@ -2208,15 +2255,7 @@ const Categories = () => {
             </div>*/}
         </div>
         {/* Version mobile horizontale */}
-        <div className="ad-container-mobile">
-          <AdSlider orientation="horizontal" />
-          <div>
-            <a href={url} target="_blank">
-              Métiers
-            </a>{" "}
-          </div>
-        </div>
-
+          
         {/* Middle Section: Background Image and Categories List */}
         <div className="middle-section-cat">
           {/* Background Image Section */}
@@ -2230,30 +2269,13 @@ const Categories = () => {
               <p className="gouvernaurat-name">{gouvernoratName}</p>
             </div>
           </div>
-          {/* Video Section - spécifique à chaque gouvernorat */}
 
-          <div className="video-section-cat">
-            <video
-              className="gouvernaurat-video"
-              controls
-              autoPlay
-              loop
-              muted
-              playsInline
-              style={{
-                width: "100%",
-                maxHeight: "400px",
-                objectFit: "cover",
-                borderRadius: "10px",
-              }}
-            >
-              <source src="/videos/felbled.mp4" type="video/mp4" />
-              {t("Your browser does not support the video tag.")}
-            </video>
-          </div>
 
           {/* Categories List Section */}
-          <Search />
+          <div className="search-bar-in-categories">
+            <Search />
+          </div>
+
 
           <div className="categories-list-container">
             <div className="categories-grid">

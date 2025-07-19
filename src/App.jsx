@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { MdArrowForwardIos,MdArrowBackIos } from "react-icons/md";
 import { FaHome, FaInfoCircle, FaEnvelope } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
-import './i18n'; // Importer la configuration
+import './i18n'; 
 const App = () => {
   const { t, i18n } = useTranslation();
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false); // Sidebar is collapsed initially

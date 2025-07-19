@@ -1,0 +1,61 @@
+/* General Layout (Three Columns) */
+.container-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px; 
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+
+/* Left Section (Delegations List) */
+.left-section-user {
+    width: 18%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    transition: width 0.3s ease; 
+}
+
+.gouvernaurat-title-user {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.delegation-list-user {
+    list-style-type: none;
+    padding: 0;
+    margin-left: 15%;
+    font-size: 11px;
+}
+
+.delegation-item-user {
+    margin-bottom: 10px;
+}
+
+.delegation-item-user label {
+    font-size: 11px;
+    display: block;
+}
+
+.delegation-item-user input {
+    margin-right: 10px;
+}
+
+/* Middle Section */
+.middle-section-user {
+    width: 100%;
+    padding: 20px;
+    transition: width 0.3s ease; 
+    margin-top: -20px;
+}
+
+.background-image-container {
+    position: relative;
+    height: 200px; 
+    margin-bottom: 20px;
+}
+
+/* ... (reste du CSS à compléter si besoin) ... */

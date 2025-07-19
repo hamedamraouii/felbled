@@ -5,6 +5,9 @@ import Footer from '../Footer';
 import GoogleMapEmbed from "./PigeonMapComponent";
 import SocialMediaLinks from './SocialMediaLinks';
 
+// API configuration
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const OneUser = () => {
   const { userName } = useParams();
   const location = useLocation();
@@ -14,16 +17,47 @@ const OneUser = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [showPhone, setShowPhone] = useState(false);
   const [usersData, setUsersData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Récupère les données JSON
+  // Fetch users data from backend API
   useEffect(() => {
-    fetch('/data/users.json')
-      .then((res) => res.json())
-      .then((data) => setUsersData(data))
-      .catch((err) => console.error('Erreur chargement JSON :', err));
+    const fetchUsers = async () => {
+      setLoading(true);
+      setError(null);
+      
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${API_BASE_URL}/api/users`, {
+          headers: {
+            'Authorization': token ? `Bearer ${token}` : '',
+            'Content-Type': 'application/json',
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        if (data.success) {
+          setUsersData(data.data);
+        } else {
+          throw new Error(data.error || 'Failed to fetch users');
+        }
+      } catch (err) {
+        console.error('Error fetching users:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
   }, []);
 
-  // Trouve l'utilisateur si pas encore défini
+  // Find user if not already defined
   useEffect(() => {
     if (!user && usersData.length > 0) {
       const normalizedParam = decodeURIComponent(userName.trim().toLowerCase());
@@ -38,7 +72,7 @@ const OneUser = () => {
     }
   }, [user, userName, usersData]);
 
-  // Définir les images (même si user est null au début)
+  // Handle images (with fallback defaults)
   const images = user?.images_url
     ? Array.isArray(user.images_url)
       ? user.images_url
@@ -49,7 +83,7 @@ const OneUser = () => {
         'https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-800x525.jpg',
       ];
 
-  // Carousel auto défilement
+  // Carousel auto scroll
   useEffect(() => {
     const interval = setInterval(() => {
       setSelectedImage((prev) => (prev + 1) % images.length);
@@ -66,13 +100,55 @@ const OneUser = () => {
     setSelectedImage((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  // Handle loading state
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Chargement des données utilisateur...</p>
+      </div>
+    );
+  }
+
+  // Handle error state
+  if (error && usersData.length === 0) {
+    return (
+      <div className="error-container">
+        <h2>Erreur de chargement</h2>
+        <p>Impossible de charger les données utilisateur: {error}</p>
+        <button onClick={() => window.location.reload()}>
+          Réessayer
+        </button>
+      </div>
+    );
+  }
+
+  // Handle user not found
   if (!user) {
-    return <div className="no-user">Aucun utilisateur trouvé.</div>;
+    return (
+      <div className="no-user">
+        <h2>Aucun utilisateur trouvé</h2>
+        <p>L'utilisateur "{userName}" n'existe pas ou n'a pas pu être chargé.</p>
+      </div>
+    );
   }
 
   const video = user.video || '';
   const social = user.socialmedia || [];
   const etiquettes = user.etiquette || [];
+
+  // Handle populated data from backend (gouvernorat and delegation might be objects)
+  const gouvernoratName = typeof user.gouvernorat === 'object' && user.gouvernorat?.name 
+    ? user.gouvernorat.name 
+    : user.gouvernorat || '';
+  
+  const delegationName = typeof user.delegation === 'object' && user.delegation?.name 
+    ? user.delegation.name 
+    : user.delegation || '';
+
+  const fullAddress = [user.address, delegationName, gouvernoratName]
+    .filter(Boolean)
+    .join(', ');
 
   return (
     <div className="user-profile">
@@ -123,7 +199,7 @@ const OneUser = () => {
             <div className="user-info">
               <h1 className="user-name">{user.name}</h1>
               <p className="user-category">{user.activité}</p>
-              <p className="user-address">{user.address}</p>
+              <p className="user-address">{fullAddress}</p>
               <p className="user-phone">
                 {showPhone ? (
                   user.telephone || '22 222 222'

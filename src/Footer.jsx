@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./footer.css";
 import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,7 +19,7 @@ const FooterComponent = () => {
   return (
     <div className="footer-container">
       <div className="footer-section">
-        <img src="publicite/logo_footerlast.png" alt="felbled" />
+   <img src="/assets/logo_footerlast.png" alt="felbled" />
       </div>
       <div className="footer-section">
         <h3>Felbled Info</h3>
@@ -58,28 +59,24 @@ const FooterComponent = () => {
         <h3>Liens Rapides</h3>
         <ul>
           <li>
-            <a href="tunisie/Bizerte">
-              {" "}
+            <Link to="/tunisie/Bizerte">
               <FontAwesomeIcon icon={faLocationDot} /> Bizerte
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="tunisie/Tunis">
-              {" "}
+            <Link to="/tunisie/Tunis">
               <FontAwesomeIcon icon={faLocationDot} /> Tunis
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="tunisie/Sousse">
-              {" "}
+            <Link to="/tunisie/Sousse">
               <FontAwesomeIcon icon={faLocationDot} /> Sousse
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="tunisie/Medenine">
-              {" "}
+            <Link to="/tunisie/Medenine">
               <FontAwesomeIcon icon={faLocationDot} /> Médenine
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
@@ -135,7 +132,7 @@ const FooterComponent = () => {
           </li>
         </ul>
         <div className="footer">
-          <p>&copy; 2025 Felbled. All rights reserved V-2.3</p>
+          <p>&copy; 2025 Felbled. All rights reserved </p>
         </div>
       </div>
     </div>

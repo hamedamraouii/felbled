@@ -1,0 +1,850 @@
+
+[
+    { "location":"48.8584,2.2945",
+  "socialmedia": [
+                  
+                       
+                      
+                    ],
+    "name": "Lindini",
+    "logo_url": "/images/logo55.jpeg",
+    "telephone" : "23001288",
+    "images_url": [
+        "/images/lindini17.jpeg",
+        "/images/lindini02.jpeg",
+        "/images/lindini03.jpeg",
+        "/images/lindini18.jpeg",
+        "/images/lindini06.jpeg",
+        "/images/lindini05.jpeg",
+        "/images/lindini07.jpeg",
+        "/images/lindini16.jpeg",
+        "/images/lindini14.jpeg",
+        "/images/lindini11.jpeg"
+    ],
+    "gouvernorat": "Tunis",
+    "pays": "Tunisie",
+    "delegation": "Tunis",
+    "activité": "Électricien",
+    "secteur": "Batiment",
+    "description":"LND.SERVICE في خدمتكم\n\n💸💸 أسوامنا مرفقة ونعاونوك بالفكرة والنصيحة مهما كانت الخدمة إلي تحب عليها، أحنا نخدمهالك وبأحسن جودة موجودة.\n\n✅ Installation électricité générale ⚡ 👨‍🔧\n✅ Caméra de surveillance\n✅ Système d'alarme 🚨\n✅ Réparation générale et rénovation 🔧\n✅ Tous les travaux électriques 🔌 ⚡\n✅ Éclairage ⚡\n✅ Entretien\n\nمع فريق محترف في خدمتكم.\n\n**Plant électricité gratuit**",
+    "address": "Rue 4101 N20 EZZOUHOUR, Tunis , Tunisie",
+    "category": ["Gym", "Yoga", "Personal Training"],
+    "etiquette": [
+        { "name": "Éclairage" },
+        { "name": "Système d'alarme" },
+        { "name": "Caméra de surveillance" },
+        { "name": "Electricité générale" }
+    ]
+},
+{   "video":"/videos/felbled_video.mp4",
+    "location":"37.27583993515575, 9.870204875330693",
+    "latitude":"37.275848749182956", 
+    "longitude":"9.870086144482109",
+    "horaire" :"Lundi-Vendredi 9h-17h",
+    "socialmedia": [
+    { "name": "Facebook" ,"url":"https://www.facebook.com/profile.php?id=61571253933313"},
+    { "name": "Whatsapp" ,"url":"https://wa.me/+21653270270"},
+    { "name": "X" ,"url":"https://x.com/felblad"},
+    { "name": "Instagram" ,"url":"https://www.instagram.com/felbled.platform/"},
+    { "name": "LinkedIn" ,"url":"https://www.linkedin.com/in/felblad-platform/"},
+    { "name": "Snapchat" ,"url":"https://www.snapchat.com/add/felbled.bigdata?share_id=z-tmpdwDfH0&locale=fr-FR"},
+    { "name": "Tiktok" ,"url":"https://www.tiktok.com/@felbled.platform"},
+    { "name": "Youtube" ,"url":"https://youtube.com/@felbled?si=9-bCbESkIZRAvaj5"}
+    ],
+    "name": "Felbled",
+    
+    "logo_url": "/images/logo_felbled.jpeg",
+    "telephone" : "53270270",
+    "images_url": [
+        "/images/felbled mise en place d'un Intranet à base d'ODOO.jpg",
+        "/images/felblad SEO.jpg",
+        "/images/felblad pack sponsoring par mois.jpg",
+        "/images/felblad pack communication 1 mois.jpg",
+        "/images/felblad Créations Vidéos.jpg",
+        "/images/felblad creation site web statique 5 pages.jpg",
+        "/images/felblad création site web personnaliser.jpg",
+        "/images/felblad création site web e-commerce.jpg",
+        "/images/felblad baniere publicitaire.jpg",
+        "/images/felblad audit de site web.jpg"
+        
+    ],
+    "gouvernorat": "Bizerte",
+    "pays": "Tunisie",
+    "delegation": "Bizerte Nord",
+    "activité": "Boite de développement",
+    "secteur": "INFORMATIQUE",
+    "description":"Le lancement de notre site web felbled.com va contribuer à maitriser l'art de l'information, \n c'est unguide virtuel vers des liens utiles pour les internautes afin de donner suite à leurs besoins. \n Notre site garantit la fiabilité, la certitude des donnés afin de créer des réseaux entre différents acteurs \n économique, industriels, touristiques ... un bénéfice pour booster l'économie du pays, le commerce et \n les relations internationales, un vrai itinéraire vers le monde entier. \n Notre site web permet de projeter la lumière sur certaines zones moins connues du pays, d'augmenter \n leur visibilité avec tout leur patrimoine (localisation des entreprises, commerces, sites touristiques...) \n c'est un miroir qui reflète les moindres détails primordiaux dans les recherches. \n Evidemment un tel projet avec une telle ambition, va permettre de créer de nouveaux postes et \n logiquement diminuer le taux de chômage.",
+    "address": "14 Rue tripoli 7000 , Bizerte , Tunisie",
+    "category": [],
+    "etiquette": [
+        { "name": "informatique" },
+        { "name": "boite de devloppement" },
+        { "name": "odoo" },
+        { "name": "banniére publicitaire" },
+        { "name": "plateforme annuaire " },
+        { "name": "creation site web" },
+        { "name": "sponsoring" },
+        { "name": "creation application mobile" }
+        ]
+       
+},
+{ "location":"48.8584,2.2945",
+        "horaire" :"8h jusqu'à 20h \n Toute la semaine 7/7",
+        "socialmedia": [
+          
+              
+              
+            ],
+            "name": "Quincaillerie Arbi",
+            "logo_url": "/images/quincaillerie.jpeg",
+            "telephone" :"92280770/98807006",
+            "images_url": [
+                "/images/quincaillerie1.jpeg",
+                "/images/quincaillerie2.jpeg",
+                "/images/quincaillerie3.jpeg",
+                "/images/quincaillerie4.jpeg",
+                "/images/quincaillerie5.jpeg",
+                "/images/quincaillerie6.jpeg",
+                "/images/quincaillerie8.jpeg"
+                
+            ],
+            "gouvernorat": "Bizerte",
+            "pays": "Tunisie",
+            "delegation": "Bizerte Nord",
+            "activité": "Quincaillerie",
+            "secteur": "ÉLECTRONIQUE",
+            "description":"Depuis 2011 \n Vente matériel de quincaillerie général \n Peinture, produits électrique, produit agricoles matériel plomberie",
+            "address": "",
+            "category": [""],
+            "etiquette": [
+                { "name": "Quincaillerie" }
+               
+            ]
+        }
+        ,{ "location":"48.8584,2.2945",
+            "horaire" :"",
+            "socialmedia": [
+              
+                   
+                  
+                ],
+                "name": "Lotfi Hammas Beb Rmal",
+                "logo_url": "/images/kiosque1.jpeg",
+                "telephone" :"25031282",
+                "images_url": [
+                    "/images/kiosque10.jpeg",
+                    "/images/kiosque2.jpeg",
+                    "/images/kiosque3.jpeg",
+                    "/images/kiosque4.jpeg",
+                    "/images/kiosque5.jpeg",
+                    "/images/kiosque6.jpeg",
+                    "/images/kiosque7.jpeg",
+                     "/images/kiosque8.jpeg",
+                      "/images/kiosque9.jpeg"
+                    
+                ],
+                "gouvernorat": "Bizerte",
+                "pays": "Tunisie",
+                "delegation": "Bizerte Nord",
+                "activité": "Drug store",
+                "secteur": "MARCHÉ",
+                "description":"Drug store Beb Rmal \n Spécialité fruits secs, Tabac chocolats, importé, Yaourt. \n Surprise pour enfant et glace",
+                "address": "",
+                "category": [""],
+                "etiquette": [
+                    { "name": "kiosque" }
+                   
+                ]
+            }
+            ,{ "location":"48.8584,2.2945",
+                "horaire" :"8h jusqu'à 22h \n Toute la semaine 7/7",
+                "socialmedia": [
+                  
+                       
+                      
+                    ],
+                    "name": "Mohamed Ali El May",
+                    "logo_url": "/images/logo_legume.jpeg",
+                    "telephone" :"55577102",
+                    "images_url": [
+                       "/images/legume2.jpeg",
+                       "/images/legume3.jpeg",
+                        "/images/legume4.jpeg",
+                        "/images/legume5.jpeg",
+                        "/images/legume6.jpeg",
+                        "/images/legume7.jpeg",
+                       "/images/legume8.jpeg"
+                        
+                        
+                    ],
+                    "gouvernorat": "Bizerte",
+                    "pays": "Tunisie",
+                    "delegation": "Bizerte Nord",
+                    "activité": "Vendeur fruits et légumes",
+                    "secteur": "MARCHÉ",
+                    "description":"Vente de légumes et fruits frais. \n Depuis 2009 à Beb Rmal avec des prix reasonable et accueillant.",
+                    "address": "",
+                    "category": [""],
+                    "etiquette": [
+                        { "name": "legume" }
+                       
+                    ]
+                },{ "location":"48.8584,2.2945",
+                    "horaire" :"8h jusqu'à 22h \n Toute la semaine 7/7",
+                    "socialmedia": [
+                      
+                           
+                          
+                        ],
+                        "name": "CHEHIR ELMI",
+                        "logo_url": "/images/chehir4.jpeg",
+                        "telephone" :" 55225700",
+                        "images_url": [
+                           "/images/chehir1.jpeg",
+                        "/images/chehir2.jpeg",
+                        "/images/chehir3.jpeg",
+                         "/images/chehir5.jpeg",
+                         "/images/chehir6.jpeg",
+                           "/images/chehir7.jpeg",
+                          "/images/chehir8.jpeg",
+                          "/images/chehir9.jpeg"
+                            
+                            
+                        ],
+                        "gouvernorat": "Bizerte",
+                        "pays": "Tunisie",
+                        "delegation": "Bizerte Nord",
+                        "activité": "Développeur",
+                        "secteur": "INFORMATIQUE",
+                        "description":"DEVLOPPEUR SOFT WEAR avec une expérience de  2 ans \n A eu son diplôme master en informatique en 2023 ",
+                        "address": "",
+                        "category": [""],
+                        "etiquette": [
+                            { "name": "PORTFOLIO" },
+                            { "name": "E-COMMERCE" },
+                            { "name": "SITE WEB SUR MESURE" },
+                            { "name": "APPLICATION WEB" },
+                            { "name": "APPLICATION MOBILE" }
+                         
+                           
+                        ]
+                    },{ "location":"48.8584,2.2945",
+                        "horaire" :"Ouvert de 8h jusqu'à 20h",
+                        "socialmedia": [
+                          
+                               
+                            { "name": "Facebook" ,"url":"  https://www.facebook.com/share/14jbYT99tJ/"} 
+                            ],
+                            "name": "Magasin Zayoud ",
+                            "logo_url": "/images/zayoud1.jpeg",
+                            "telephone" :"98136791",
+                            "images_url": [
+                             "/images/zayoud2.jpeg",
+                           "/images/zayoud3.jpeg",
+                          "/images/zayoud4.jpeg",
+                        "/images/zayoud5.jpeg",
+                            "/images/zayoud6.jpeg",
+                            "/images/zayoud7.jpeg",
+                            "/images/zayoud8.jpeg",
+                             "/images/zayoud9.jpeg",
+                             "/images/zayoud10.jpeg",
+                             "/images/zayoud11.jpeg"
+                                
+                                
+                            ],
+                            "gouvernorat": "Bizerte",
+                            "pays": "Tunisie",
+                            "delegation": "Bizerte Nord",
+                            "activité": "Magasin",
+                            "secteur": "MARCHÉ",
+                            "description":"عند زيود كل شي موجود \n Magazin de famille Zayoud existe depuis 1988 Vente tout articles alimentaires \n Agro-alimentaire \n Alimentation chats et chiens \n Fromages \n Citronade \n Fruits surgelés \n Bonbonne 19L  \n Eaux et gazeuses \n Pains, pain complet \n Produits hygiène \n Huile d'olive",
+                            "address": "",
+                            "category": [""],
+                            "etiquette": [
+                                { "name": "Citronade" },
+                                { "name": "Agro-alimentaire" },
+                                { "name": "Produits hygiène" },
+                                { "name": "Huile d'olive" }
+                             
+                             
+                               
+                            ]
+                        },
+
+                        
+    {   
+        "location":"R4Q8+7PV, Tunis",
+        "latitude":"36.838263", 
+        "longitude":"10.116850",
+        "horaire" :"Lundi-vendredi 8:30h - 18:30h \n samedi 08:30h - 14:15h",
+        "socialmedia": [
+        { "name": "Facebook" ,"url":"https://www.facebook.com/imofercherif"},
+        { "name": "Tiktok" ,"url":"https://www.tiktok.com/@imofer_cherif"}
+
+        ],
+    
+
+    "name": "Imofer Cherif",
+    "logo_url": "/images/logo_imo.jpeg",
+    "telephone" : "22 476 584",
+    "images_url": [
+       
+        "/images/imo2.jpeg",
+       
+        "/images/imo3.jpeg",
+        "/images/imo4.jpeg",
+       
+        
+        
+        
+        "/images/imo9.jpeg",
+        "/images/imo10.jpeg",
+        "/images/imo20.jpeg",
+        "/images/imo21.jpeg",
+        "/images/imo22.jpeg",
+        "/images/imo23.jpeg",
+         "/images/imo24.jpeg"
+    ],
+    "gouvernorat": "Ariana",
+    "pays": "Tunisie",
+    "delegation": "Mnihla",
+    "activité": "Modification",
+    "secteur": "AUTO. MOTO",
+    "description":"Portes Bagages,Led, Auvent, 4x4, galerie de toit Off-Road ,couvre benne,Pare choc, \n Bas de caisse, Marche Pied,Cabine,Separation ,Snorkel, Couverture Aluminium & Galva",
+    "address": "Rue mnihla,ariana, Tunisie",
+    "category": [" "],
+    "etiquette": [
+        { "name": "Portes Bagages" },
+        { "name": "LED" },
+        { "name": "galerie de toit Off-Road" },
+        { "name": "Bas de caisse" },
+        { "name": "Marche Pied" },
+        { "name": "Separation" }
+
+    ]
+},
+{ "location":"48.8584,2.2945",
+                    "horaire" :"8h jusqu'à 22h \n Toute la semaine 7/7",
+                    "socialmedia": [  { "name": "Whatsapp" ,"url":"https://wa.me/+21625467900"}
+                      
+                           
+                          
+                        ],
+                        "name": "IBRAHIM KHEMIRI",
+                        "logo_url": "/images/khemiri_logo.jpeg",
+                        "telephone" :"25467900",
+                        "images_url": [
+                    "/images/KHEMIRI1.jpg",
+                     "/images/KHEMIRI2.jpg",
+                        "/images/KHEMIRI3.jpg",
+                        "/images/KHEMIRI4.jpg",
+                      "/images/KHEMIRI5.jpg",
+                      "/images/KHEMIRI6.jpg",
+                      "/images/KHEMIRI7.jpg",
+                       "/images/KHEMIRI8.jpg",
+                       "/images/KHEMIRI9.jpg",
+                       "/images/KHEMIRI10.jpg"
+                            
+                            
+                        ],
+                        "gouvernorat": "Bizerte",
+                        "pays": "Tunisie",
+                        "delegation": "Bizerte Nord",
+                        "activité": "Chaud Froid",
+                        "secteur": "MÉTIERS",
+                        "description":"depuis 2015 professionnel visite a domicile Garantie \n اسعار مقبولة و خدمة متقونة  "
+,
+                        "address": "Avenue hssan enouri,Houmet echourfa,Bizerte,7000,Tunisie",
+                        "category": [""],
+                        "etiquette": [
+                            { "name": "Bricoleur" },
+                            { "name": "Plomberie" },
+                            { "name": "Eléctricité général" },
+                            { "name": "Réparation" },
+                            { "name": "Chaufeaux solaire" },
+                            { "name": "Climatisation" },
+                            { "name": "photovoltaique" }
+                         
+                           
+                        ]
+                    },
+                    {   
+                        "location":"00000, Bizerte",
+                        "latitude":"00000", 
+                        "longitude":"000000",
+                        "horaire" :"Lundi-samedi 8:00h - 17:00h",
+                        "socialmedia": [
+                        { "name": "Instagram" ,"url":"https://www.instagram.com/royal_peinture_bizerte/"},
+                        { "name": "Tiktok" ,"url":"https://www.tiktok.com/@royal_peinture_bizerte"},
+                        { "name": "Facebook" ,"url":"https://www.facebook.com/profile.php?id=100086556816497"}
+                
+                        ],
+                    
+                
+                    "name": "Royal Peinture Bizerte ",
+                    "logo_url": "/images/logo_royal.jpeg",
+                    "telephone" : "27 525 993",
+                    "images_url": [
+                        "/images/royal_visite.jpeg",
+                        "/images/royal2.jpeg",
+                        "/images/royal3.jpeg",
+                        "/images/royal4.jpeg",
+                        "/images/royal5.jpeg",
+                        "/images/royal6.jpeg",
+                        "/images/royal7.jpeg",
+                        "/images/royal8.jpeg",
+                        "/images/royal9.jpeg",
+                        "/images/royal10.jpeg"
+                    ],
+                    "gouvernorat": "Bizerte",
+                    "pays": "Tunisie",
+                    "delegation": "Bizerte Nord",
+                    "activité": "peintre",
+                    "secteur": "MÉTIERS",
+                    "description":"*Peinture intérieur/extérieur \n *décoration intérieur \n *ravalement de façade \n *étanchéité",
+                    "address": "Bizerte, Tunisie",
+                    "category": [" "],
+                    "etiquette": [
+                        { "name": "Peinture extérieur" },
+                        { "name": "décoration intérieur" },
+                        { "name": "ravalement de façade" },
+                        { "name": "étanchéité" },
+                        { "name": "Peinture intérieur" }
+                
+                    ]
+                },
+         
+{   
+    "location":"37.273751,9.868074",
+    "latitude":"37,2720905", 
+    "longitude":"9,8708565",
+    "horaire" :" 10:00h - 19:00h",
+    
+
+
+"name": "CAB Store",
+"logo_url": "/images/logo-cab1.jpeg",
+"telephone" : "53 942 775",
+"images_url": [
+    "/images/cab1.jpeg",
+    "/images/cab2.jpeg",
+    "/images/cab3.jpeg",
+    "/images/cab4.jpeg"
+],
+"gouvernorat": "Bizerte",
+"pays": "Tunisie",
+"delegation": "Bizerte nord",
+"activité": "Store",
+"secteur": "SPORT",
+"description":"La boutique est ouverte depuis 03 / 08 / 2023",
+"address": "Rue hadi chaker,Bizerte, Tunisie",
+"category": [" "],
+"etiquette": [
+    { "name": "football" },
+    { "name": "cab" },
+    { "name": "sport" }
+
+]
+},
+{   
+    "location":"37.273751,9.868074",
+    "latitude":"37,2720905", 
+    "longitude":"9,8708565",
+    "horaire" :" Lundi - vendredi De 08h à 18h",
+    "socialmedia": [
+        { "name": "Facebook" ,"url":"https://www.facebook.com/share/1AYv24uxgc/"},
+        { "name": "Whatsapp" ,"url":"https://wa.me/+21650333918"},
+        { "name": "Instagram" ,"url":"https://www.instagram.com/hadilchargui?igsh=MWFieWtwa3doNTBtNw=="}
+
+
+    ],
+
+
+"name": "Hadil chargui",
+"logo_url": "/images/logo_hadil.jpeg",
+"telephone" : "50333918",
+"images_url": [
+    "/images/Hadil1.jpg",
+    "/images/Hadil2.jpg",
+    "/images/Hadil3.jpg",
+    "/images/Hadil4.jpg",
+    "/images/Hadil5.jpg",
+    "/images/Hadil6.jpg",
+    "/images/Hadil7.jpg",
+    "/images/Hadil8.jpg",
+    "/images/Hadil9.jpg",
+    "/images/Hadil10.jpg"
+],
+"gouvernorat": "La Manouba",
+"pays": "Tunisie",
+"delegation": "La Manouba",
+"activité": "Architecte de l'intérieur",
+"secteur": "BÂTIMENT",
+"description":"Architecte d'intérieur diplômée d'État de l'Institut  Supérieur des Beaux-Arts de Tunisie et d'un stage en bureau d'architecture . \n Travailler dans un bureau d'architecture d'intérieur. \n J'ai travaillait sur un projet (conception en plan  conception 3 D , plan technique et détails techniques). \n J'ai visite chantiers  conception d’une salle de conférence dans un hôtel sheraton.",
+"address": "Manouba, avenue Habib bourguiba",
+"category": [" "],
+"etiquette": [
+    { "name": "Conception bidimensionnelle" },
+    { "name": "Modélisation tridimensionnelle" },
+    { "name": "Pilotage de chantier" },
+    { "name": "Plan technique" },
+    {"name":"Relevé architecture"}
+
+]
+},
+{   
+    "location":"36.8587351,10.1882320",
+    "latitude":"00000", 
+    "longitude":"000000",
+    "horaire" :"tous les jour 8:00h - 19:00h",
+    "socialmedia": [
+    { "name": "Facebook" ,"url":"https://www.facebook.com/share/15pQtpEacd/"},
+    { "name": "Whatsapp" ,"url":"https://wa.me/+21693122526"}
+    ],
+
+
+"name": "البية للتقطير",
+"logo_url": "/images/logo_baya1.jpeg",
+"telephone" : "93 122 526",
+"images_url": [
+    "/images/baya1.jpg",
+    "/images/baya2.jpg",
+    "/images/baya3.jpg",
+    "/images/baya4.jpg",
+    "/images/baya5.jpg",
+    "/images/baya6.jpg"
+],
+"gouvernorat": "Ariana",
+"pays": "Tunisie",
+"delegation": "Ariana ville",
+"activité": "Activité locale",
+"secteur": "MARCHÉ",
+"description":"لو تحب منتوج طبيعي مخدوم بكل حب و شغف ريحة العطرشية و الزهر و العسل الحر و الكليل و الزعتر كل الزيوت الطبيعية كل منفعة و كل منتوج طبيعي ريحة الفاح الدياري تابل و كروية و هريسة تفوح كل ماكلة تي حتى من الملوخية المرحية الي ريحتها تضرب من أول النهج و ما ناقفوش هنا حتى منتوجات الدڨلة و قلوبها عندنا مرحبا بيكم واتساب تاعنا محلول ليكم نومرونا تتحصلو عليه كل وقت بكل محبة نودوكم بخدمتانا مرحبا بيكم",
+"address": "Ettamir 5,Ariana, Tunisie",
+"category": [" "],
+"etiquette": [
+    { "name": "التوابـل" },
+    { "name": "الهريسة العربـي" },
+    { "name": "زيت الأكليـل" },
+    { "name": "زيت البابونج "},
+    { "name": "زيت الخروع" },
+    { "name": "زيت الخزامى" },
+    { "name": "زيت الزعتر" },
+    { "name": "زيت الزنجبيـل" },
+    { "name": "زيت الصبـار" },
+    { "name": "زيت الفليو" },
+    { "name": "زيت اللوبـان" },
+    { "name": "زيت الورد" },
+    { "name": "زيت القظوم" },
+    { "name": "عسل السدر" },
+    { "name": "عسل جلـبـي" },
+    { "name": "ماء الأكليـل" },
+    { "name": "ماء الخزامـى" },
+    { "name": "ماء الريحان" },
+    { "name": "ماء القنارية" },
+    { "name": "ماء زهـر" },
+    { "name": "ماء عطـرشية" },
+    { "name": "ماء ورد" }
+
+]
+},
+
+  
+{   
+    "location":"00000, Bizerte",
+    "latitude":"00000", 
+    "longitude":"000000",
+    "horaire" :"Lundi-samedi 8:00h - 18:00h",
+    "socialmedia": [
+    { "name": "instagram" ,"url":"https://www.instagram.com/poty_design/"},
+    { "name": "Tiktok" ,"url":"https://www.tiktok.com/@poty.design?lang=fr"},
+    { "name": "Facebook" ,"url":"https://www.facebook.com/groups/472788129878467"},
+    { "name": "Whatsapp" ,"url":"https://wa.me/+21627116906"}
+
+    ],
+
+"name": "Poty Design ",
+"logo_url": "/images/logo-poty.jpeg",
+"telephone" : "27 116 906",
+"images_url": [
+    "/images/poty1.png",
+    "/images/poty2.jpg",
+    "/images/poty3.jpg",
+    "/images/poty4.jpg",
+    "/images/poty5.jpg",
+    "/images/poty6.jpg",
+    "/images/poty7.jpg",
+    "/images/poty8.jpg",
+    "/images/poty9.jpg",
+    "/images/poty10.jpg"
+],
+"gouvernorat": "BIZERTE",
+"pays": "Tunisie",
+"delegation": "Bizerte Nord",
+"activité": "Maison",
+"secteur": "SHOPPING",
+"description":"حاير في هدية لعبد عزيز عليك ؟ 🤔، دارك ولا بيروك ناقصين لمسة فنية ترد فيه الروح ؟ 🥰 عندك terrasse/balcon فارغ و تحب تزينو؟ 💥 عليك بمحابس مرسومين بكل حب و فيانة ❤️ ",
+"address": "Bizerte, Tunisie",
+"category": [" "],
+"etiquette": [
+    { "name": "Poterie" },
+    { "name": "décor" },
+    { "name": "Fait a la main" },
+    { "name": "personnaliser" }
+
+]
+},
+{   
+    "location":"00000,tunis",
+    "latitude":"00000", 
+    "longitude":"000000",
+    "horaire" :"Lundi-samedi 8:00h - 18:00h",
+    "socialmedia": [
+    { "name": "Facebook" ,"url":"https://www.facebook.com/share/1BZ852R1xR/"},
+    { "name": "Whatsapp" ,"url":"https://wa.me/+21650306476"}
+
+    ],
+
+"name": "Amine khemiri",
+"logo_url": "/images/logo-amine.jpeg",
+"telephone" : "50 306 476",
+"images_url": [
+    "/images/amine1.jpeg",
+    "/images/amine2.jpeg",
+    "/images/amine3.jpeg"
+ 
+],
+"gouvernorat": "TUNIS",
+"pays": "Tunisie",
+"delegation": "Ettahrir",
+"activité": "Taxi moto",
+"secteur": "TRANSPORT",
+"description":" Moto neuf sécuriser transport de personnes pour les délégation de Tunis et Ariana \n على ذمتكم لتوصيل مشترياكم و خلاص فواتيركم  ",
+"address": "Hay Tahrir Tunis, Tunisie",
+"category": [" "],
+"etiquette": [
+    { "name": "Livraison" },
+    { "name": "Taxi moto" },
+    { "name": "les courses" },
+    { "name": "marchandise" },
+    { "name": "payement facture" }
+
+]
+},
+
+  
+{   
+    "location":"37.276024979325,9.87039374994051",
+    "latitude":"00000", 
+    "longitude":"000000",
+    "horaire" :"Lundi-samedi 9:00h - 18:00h",
+    "socialmedia": [
+   
+    ],
+
+"name": "Moustafa tarzi",
+"logo_url": "/images/logo-Moustafa.jpeg",
+"telephone" : "21 964 241",
+"images_url": [
+    "/images/Moustafa1.jpeg",
+    "/images/Moustafa2.jpeg",
+    "/images/Moustafa3.jpeg",
+     "/images/Moustafa4.jpeg"
+ 
+],
+"gouvernorat": "BIZERTE",
+"pays": "Tunisie",
+"delegation": "Bizerte nord",
+"activité": "Tailleur",
+"secteur": "METIER",
+"description":" Depuis 2002 \n Expérience Depuis 1998 ",
+"address": "Beb jdid Bizerte , Tunisie",
+"category": [" "],
+"etiquette": [
+    { "name": "Ajustement" },
+    { "name": "Couturier pour femme" },
+    { "name": "Création vêtement homme" },
+    { "name": "Femmes" },
+    { "name": "Homme" },
+    { "name": "Réparation" }
+
+]
+},
+{   
+    "location":"36.79870964905311, 10.180617397224982",
+    "latitude":"00000", 
+    "longitude":"000000",
+    "horaire" :"A partir de 10h TOUTE LA SEMAINE 7/7",
+    "socialmedia": [
+    { "name": "Whatsapp" ,"url":"https://wa.me/+21690472318"}
+
+    ],
+
+"name": "MLmz prod",
+"logo_url": "/images/logo-Mlmz.jpeg",
+"telephone" : "90 472 318",
+"images_url": [
+    "/images/logo-Mlmz.jpeg"
+ 
+],
+"gouvernorat": "TUNIS",
+"pays": "Tunisie",
+"delegation": "Tunis",
+"activité": "Boite de Prod",
+"secteur": "ARTS",
+"description":"MLmz production est un studio de production audiovisuelle  .\n Foundé par l'artiste de Rap tunisien Mohamed Wassim ghidaoui sous le nom artistique 'Mc ghidaoui' et le rappeur français Moha Amri . \n En monde de collaborer avec Rh Steps prod situé à  rue de Grèce tunis centre ville  . \n On vas vous proposer des services : \n - record, mixage, mastering \n - photographie, vediographie \n - salle de répétition  ",
+"address": "Rue de Grèce tunis centre ville,Tunis",
+"category": [" "],
+"etiquette": [
+    { "name": "mastering" },
+    { "name": "mixage" },
+    { "name": "photographie" },
+    { "name": "record" },
+    { "name": "videographie" }
+
+]
+},
+{   
+    "location":"36.8019908768884, 10.181572128835846",
+    "latitude":"00000", 
+    "longitude":"000000",
+    "horaire" :"Toujours 06h-21h",
+    "socialmedia": [
+        { "name": "Facebook" ,"url":"https://www.facebook.com/share/16Aymni7Fp/"}
+       
+    
+
+    ],
+
+"name": "YANNi",
+"logo_url": "/images/logo_YANNI.jpg",
+"telephone" : "52920829",
+"images_url": [
+    
+    "/images/YANNI2.jpg",
+    "/images/YANNI1.jpg",
+    "/images/YANNI3.jpg",
+    "/images/YANNI4.jpg",
+    "/images/YANNI5.jpg",
+    "/images/YANNI6.jpg",
+    "/images/YANNI7.jpg",
+    "/images/YANNI8.jpg"
+
+ 
+],
+"gouvernorat": "TUNIS",
+"pays": "Tunisie",
+"delegation": "Tunis",
+"activité": "Café culturels",
+"secteur": "LOISIR",
+"description":" Bienvenue à YANNi ! Ici, on vous sert bien plus qu’un café : chaque jour, découvrez notre menu du jour et profitez d’une partie de billard entre amis sur nos deux tables. Installez-vous, détendez-vous, et vivez un moment unique dans une ambiance chaleureuse et culturelle.\n À YANNI, la culture se savoure autant qu’elle se partage. Goûtez à notre menu du jour, laissez-vous porter par l’ambiance créative du lieu, et défiez vos amis autour de nos deux tables de billard. Un espace où la convivialité rime avec inspiration.\n Nous vous accueille dans un cadre raffiné alliant culture, gastronomie et loisirs. Chaque jour, notre menu du jour met à l’honneur des saveurs authentiques, tandis que nos deux tables de billard offrent un espace idéal pour se détendre. Laissez-vous séduire par une expérience à la fois gourmande et culturelle.\n Envie de manger, bouger et t’amuser ? YANNI t’attend avec ses menus du jour pleins de saveurs et ses deux tables de billard prêtes pour des défis endiablés. C’est l’endroit parfait pour chiller, rencontrer et vibrer au rythme de la culture."
+,
+"address": "Rue Martin Luther king, rue de Marseille,Tunis",
+"category": [" "],
+"etiquette": [
+    { "name": "Ateliers culturels " },
+    { "name": "écriture" },
+    { "name": " peinture" },
+    { "name": "Menus  variés" },
+    { "name": "Menus du jour" },
+    { "name": "Service de boissons " },
+    { "name": "café" },
+    { "name": "thés" },
+    { "name": "Soirée thématique" },
+    { "name": "Tables de billard" }
+]
+},
+{   
+    "location":"36.8019908768884, 10.181572128835846",
+    "latitude":"00000", 
+    "longitude":"000000",
+    "horaire" :"Lundi- samedi 08h-19h",
+    "socialmedia": [
+        { "name": "Whatsapp" ,"url":"https://wa.me/+21620430661"}
+       
+    
+
+    ],
+
+"name": "Madame Fathiya",
+"logo_url": "/images/logo_Fathiya.jpg",
+"telephone" : "20430661",
+"images_url": [
+    
+    "/images/Fathiya1.jpg",
+    "/images/Fathiya2.jpg",
+    "/images/Fathiya3.jpg",
+    "/images/Fathiya4.jpg",
+    "/images/Fathiya5.jpg",
+    "/images/Fathiya6.jpg",
+    "/images/Fathiya7.jpg",
+    "/images/Fathiya8.jpg",
+    "/images/Fathiya9.jpg",
+    "/images/Fathiya10.jpg"
+
+ 
+],
+"gouvernorat": "Manouba",
+"pays": "Tunisie",
+"delegation": "Denden",
+"activité": "Tapissiers",
+"secteur": "MÉTIERS",
+"description":"مرحبا بيكم في محلكم وين نقدمولكم احسن خدمات تغليف كل من تصليح فروشات و صالات تغليف و خياطة القماشات نعاونوكم على افكار جديدة و تحسينات مش مجرد خدمات أما غرام يهزنا باش نخرجو خدمتنا من غير اغلاط باش الكليون تاعنا يكون فرحان و يعاود يرجع كل ما يحب على تفصيل قماش جديد و إلا تصليح بنك قديم صالاتكم و كوجيناتكم بيوت نومكم و بيوت صغاركم مرحبا بيكم موجودين على ذمتكم \n✨ Apportez une touche d’élégance à votre intérieur avec cette magnifique tapisserie faite main. Un design unique et des couleurs vibrantes pour sublimer votre espace. Idéale pour ajouter du charme et de la personnalité à n’importe quelle pièce. 🌿 #Art #Tapisserie #Décoration \n Si vous avez des détails spécifiques que vous voulez inclure, n’hésitez pas à nous les dire !",
+"address": "Rue da ghana,Denden,Manouba",
+"category": [" "],
+"etiquette": [
+    { "name": "Conseils en décoration" },
+    { "name": "Création sur mesure" },
+    { "name": "Design original" },
+    { "name": "Réparation et entretien" },
+    { "name": "Tissage artisanale" }
+]
+},
+{   
+    "location":"36.801356, 10.120479",
+    "latitude":"00000", 
+    "longitude":"000000",
+    "horaire" :"Disponible 24h/24, 7j/7",
+    "socialmedia": [
+        { "name": "Whatsapp" ,"url":"https://wa.me/+21352411487 "}
+       
+    
+
+    ],
+
+"name": "Mohamed Ali aliouat",
+"logo_url": "/images/logo_Mohamed Ali aliouat.jpg",
+"telephone" : "+21352411487 / +213 658 617 974",
+"images_url": [
+    
+    "/images/logo_Mohamed Ali aliouat.jpg"
+
+ 
+],
+"gouvernorat": "Manouba",
+"pays": "Tunisie",
+"delegation": "Le Bardo",
+"activité": "Louage",
+"secteur": "TRANSPORT",
+"description":" Se déplace entre la Tunisie (Le Bardo) et l’Algérie (Annaba).\n Transporteur de marchandises et de personnes entre la Tunisie et l’Algérie.",
+
+"category": [" "],
+"etiquette": [
+    { "name": "Transporteur" },
+    { "name": "Déplacement" },
+    { "name": "Transporteur des marchandises " },
+    { "name": "Transporteur des personnes" }
+    
+]
+}
+
+
+
+
+
+
+        
+        ]
+
+
+

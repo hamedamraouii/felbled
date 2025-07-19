@@ -1,0 +1,23 @@
+{
+  "name": "hamed test",
+  "logo_url": "/images/logo55.jpeg",
+  "images_url": ["/images/1.jpg", "/images/2.jpg"],
+  "video": "/videos/felbled_video.mp4",
+  "gouvernorat": "Tunis",
+  "pays": "Tunisie",
+  "delegation": "Tunis",
+  "activité": "Électricien",
+  "secteur": "Bâtiment",
+  "description": "Installation et réparation",
+  "address": "Rue 123, Tunis",
+  "category": ["SANTÉ", "BÂTIMENT"],
+  "etiquette": [{ "name": "Caméra" }, { "name": "Éclairage" }],
+  "telephone": "23001288",
+  "location": "36.8,10.2",
+  "latitude": "36.8",
+  "longitude": "10.2",
+  "socialmedia": [
+    { "name": "Facebook", "url": "https://facebook.com/lindini" }
+  ],
+  "horaire": "Lundi-Vendredi 9h-17h"
+}

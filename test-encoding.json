@@ -1,0 +1,13 @@
+{
+
+  "name": "Test Encodage UTF-8",
+  "gouvernorat": "Tunis",
+  "delegation": "Tunis",
+  "category": ["SANTÉ", "BÂTIMENT"],
+  "activité": "Médecin généraliste",
+  "description": "Médecin spécialisé en santé générale",
+  "telephone": "23001288",
+  "etiquette": [{"name": "Santé"}, {"name": "Médecine"}],
+  "socialmedia": [{"name": "Facebook", "url": "https://facebook.com/test"}]
+
+}
